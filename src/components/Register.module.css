@@ -1,0 +1,25 @@
+  /* body{
+    background-image: linear-gradient(to right, #9896f0 , #FBC8D5);
+}  */
+
+div{
+    padding: 10px;
+}
+input{
+    border-radius: 15px;
+    padding: 3%;
+    width: 60%;
+    height: fit-content;
+    border: 0;
+    box-shadow: 0px 2px 2px 2px #888888;
+}
+button{
+    background-color: #FBC8D5;
+    margin-top: 40px;
+    border-radius: 15px;
+    padding: 3%;
+    width: 60%;
+    height: fit-content;
+    border: 0;
+    box-shadow: 0px 2px 2px 2px #888888;
+}
