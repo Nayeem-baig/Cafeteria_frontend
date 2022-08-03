@@ -6,7 +6,8 @@ import Product from './components/Product';
 import Profile from './components/Profile';
 import Favourites from './components/favourites';
 import AddItem from './components/Admin/AddItem';
-import Recommended from './components/Recommended';
+import Veg from './components/veg';
+import Nonveg from './components/Vonveg';
 
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/users/display_favourites" element={<Favourites/>}/>
       <Route path="/addItems" element={<AddItem/>}/>
-      <Route path="/recommended" element={<Recommended/>}/>
+      <Route path="/product/veg" element={<Veg/>}/>
+      <Route path="/product/nonveg" element={<Nonveg/>}/>
     </Routes>
     </BrowserRouter>
 )}

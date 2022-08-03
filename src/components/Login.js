@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from "react";
-import { Button , Alert} from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from "./Login.css";
 const Login = () => {
@@ -88,12 +88,12 @@ const Login = () => {
             autoComplete="on"
           ></input>
         </div >
-        <div className='btn'>
-        <Button className="log_btn" onClick={PostData}>Login</Button>
+        <div>
+        <Button className="wd-100" onClick={PostData}>Login</Button>
         </div>
       </form>
       <div className='create'>
-        <p className='create'>Don't have an account<Link to="/register">Register</Link></p>
+        <p className='create'>Don't have an account ?<Link to="/register"> Register</Link></p>
       </div>
     </div>
   );

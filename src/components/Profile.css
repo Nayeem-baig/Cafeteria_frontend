@@ -4,7 +4,6 @@ div{
     align-items: center;
 }
 .container{
-    background-color: rgb(210, 226, 255);
-    border: 1px solid black;
     border-radius: 35px;
+    box-shadow: 5px 5px 5px  #888888;
 }

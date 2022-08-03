@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
-import styles from "./Register.css";
+import styles from "./Login.css";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -67,14 +68,15 @@ const Register = () => {
   };
 
   return (
-    <div className="container">
-      <form method="post" className="container" onSubmit={handleSubmit}>
+    <div className="Auth-form-container">
+      <form method="post" className="Auth-form" onSubmit={handleSubmit}>
         <div className="logo">
           <h1>Register</h1>
         </div>
         <div>
           <input
             type="text"
+            className="form-control mt-1"
             value={userRegistration.name}
             onChange={handleInput}
             name="name"
@@ -86,6 +88,7 @@ const Register = () => {
         <div>
           <input
             type="text"
+            className="form-control mt-1"
             onChange={handleInput}
             value={userRegistration.username}
             name="username"
@@ -97,6 +100,7 @@ const Register = () => {
         <div>
           <input
             type="text"
+            className="form-control mt-1"
             onChange={handleInput}
             value={userRegistration.email}
             name="email"
@@ -108,6 +112,7 @@ const Register = () => {
         <div>
           <input
             type="text"
+            className="form-control mt-1"
             onChange={handleInput}
             value={userRegistration.password}
             name="password"
@@ -119,6 +124,7 @@ const Register = () => {
         <div>
           <input
             type="number"
+            className="form-control mt-1"
             onChange={handleInput}
             value={userRegistration.phn}
             name="phn"
@@ -127,15 +133,9 @@ const Register = () => {
             autoComplete="on"
           ></input>
         </div>
-        <input
-          type="submit"
-          name="signup"
-          id="signup"
-          className="form-submit"
-          value="register"
-          onClick={PostData}
-          Register
-        />
+        <div>
+        <Button className="button" onClick={PostData}>Register</Button>
+        </div>
       </form>
       <Link to="/login">Already have an account</Link>
     </div>

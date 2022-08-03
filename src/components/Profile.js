@@ -13,7 +13,6 @@ const Profile = () => {
   }, []);
 
   const usertoken = localStorage.getItem("token");
-  //   console.log(usertoken);
 
   const loadProfiles = async () => {
     var config = {
@@ -34,22 +33,20 @@ const Profile = () => {
       });
   };
 
-  console.log(profile);
   function logout() {
     localStorage.removeItem("token");
     navigate("/login");
   }
   function RenderFunc() {
     return (
-      <div className="container">
-        <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180" />
+      <div>
+        <Card style={{ width: "18rem" }} className="container">
+        <Card.Img className="profile-img" variant="top" src={require("../assets/profileimg.png")} />
           <div className={styles.pcard}>
           <Card.Body>
             <Card.Title>Profile</Card.Title>
-            
             <Card.Text> Name: {profile.name}</Card.Text>
-            <Card.Text> Phn: {profile.phn}</Card.Text>
+            <Card.Text> Phn: +91 {profile.phn}</Card.Text>
             <Card.Text> Email: {profile.email}</Card.Text>
            
             

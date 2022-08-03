@@ -1,6 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import styles from "./favourites.module.css";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Image from 'react-bootstrap/Image';
+import { NavLink } from "react-router-dom";
+import styles from "./Product.css";
 const Favourites = () => {
   const [favourites, setFavourites] = useState([]);
   let userFavs;
@@ -28,19 +32,41 @@ const Favourites = () => {
         console.log(error);
       });
     };      
-    
+    function addToCart({x}){
+      console.log("clicked add to cart "+ ( JSON.stringify(x) ));
+  }
     console.log(favourites);
-  return <div>
-  Favourites
-  {favourites.length > 0 && favourites.map(
-    x => <div>
-      <p>Name: {x.name}</p>
-      <p>{x.description}</p>
-      <p>Price: {x.price}</p>
-      <p>Category: {x.category}</p>
-      <p>Veg: {String(x.veg)}</p>
+    function RenderFunc() {
+      return (
+        <div>
+          Veg Products
+          <ul>
+            <li>
+              {" "}
+              <NavLink to="/product">View All</NavLink> <t />
+            </li>
+          </ul>
+          {favourites.length > 0 &&
+            favourites.map((x) => (
+              <div>
+               <Card className="bgcard" style={{ minWidth: '400px' }}>
+     <Card.Body>
+     <Card.Img className="card-img-top" variant="top" src={require("../assets/burger.jpg")} />
+      <Card.Text>{x.name}</Card.Text>
+      <Card.Text>{`₹${x.price}`}</Card.Text>
+      <Card.Text>{(x.veg)  ? "Veg" : "Non Veg"}</Card.Text>
+      <Card.Text>{x.description}</Card.Text>
+      <div> 
+      <Button onClick={() => addToCart({x})} variant="danger" className="w-100 btns">Add to cart </Button>
+      <Button variant="danger" className="w-100">Favourites </Button>
       </div>
-    )}
-</div>
+     </Card.Body>
+    </Card>
+            </div>
+            ))}
+        </div>
+      );
+    }
+    return <RenderFunc />;
 };
 export default Favourites;
