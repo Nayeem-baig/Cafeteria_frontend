@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-
+import { Button , Alert} from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import styles from "./Login.css";
 const Login = () => {
   const navigate = useNavigate();
   const [userLogin, setUserLogin] = useState({
@@ -58,14 +59,15 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <form method="post" className="container" onSubmit={handleSubmit}>
+    <div className="Auth-form-container">
+      <form method="post" className="Auth-form" onSubmit={handleSubmit}>
         <div className="logo">
           <h1>Login</h1>
         </div>
         <div>
           <input
             type="text"
+            className="form-control mt-1"
             onChange={handleInput}
             value={userLogin.email}
             name="email"
@@ -77,6 +79,7 @@ const Login = () => {
         <div>
           <input
             type="text"
+            className="form-control mt-1"
             onChange={handleInput}
             value={userLogin.password}
             name="password"
@@ -84,16 +87,14 @@ const Login = () => {
             placeholder="Password"
             autoComplete="on"
           ></input>
+        </div >
+        <div className='btn'>
+        <Button className="log_btn" onClick={PostData}>Login</Button>
         </div>
-        <input
-          type="submit"
-          name="login"
-          id="login"
-          className="form-submit"
-          value="Login"
-          onClick={PostData}
-        />
       </form>
+      <div className='create'>
+        <p className='create'>Don't have an account<Link to="/register">Register</Link></p>
+      </div>
     </div>
   );
 };

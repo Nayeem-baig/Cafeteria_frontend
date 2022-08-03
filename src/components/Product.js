@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import styles from "./Products.module.css";
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Nav from 'react-bootstrap/Nav';
+import styles from "./Products.css";
 const Product = () => {
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
@@ -50,11 +53,19 @@ const Product = () => {
         
         {product.length > 0 && product.map(
           x => <div>
-            <p>Name: {x.name}</p>
-            <p>{x.description}</p>
-            <p>Price: {x.price}</p>
-            <p>Category: {x.category}</p>
-            <p>{x.veg ? "Veg" : "Non Veg"}</p>
+             <Card style={{ marginTop: '15px' }}>
+   <Card.Img variant="top" />
+   <Card.Body>
+    <Card.Text>{x.name}</Card.Text>
+    <Card.Text>{`₹${x.price}`}</Card.Text>
+    <Card.Text>{x.description}</Card.Text>
+    <Button
+     variant="success"
+     >
+     Add to cart
+    </Button>
+   </Card.Body>
+  </Card>
             </div>
           )}
       </div>
