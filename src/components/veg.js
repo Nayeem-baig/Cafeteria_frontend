@@ -3,19 +3,29 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Image from 'react-bootstrap/Image';
 import styles from "./Product.css";
 const Veg = () => {
+  const cartData = useSelector((state) => state?.CartReduser)
+  console.log("cartData",cartData);
+  const dispatch = useDispatch();
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
   let item;
 
   useEffect(() => {
-    // if (product?.lenght === 0) {
     loadProducts();
-    // }
+    const unloadCallback = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+      return "";
+    };
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => window.removeEventListener("beforeunload", unloadCallback);
   }, []);
-  console.log("produuct", product);
+
 
   const token = localStorage.getItem("token");
 
@@ -41,10 +51,11 @@ const Veg = () => {
   function handleFav() {
     navigate("users/display_favourites");
   }
-  function addToCart({x}){
-    console.log("clicked add to cart "+ ( JSON.stringify(x) ));
-}
-  function RenderFunc() {
+  const handlecart = (x) => {
+    console.log(x)
+    dispatch({ type: "ADD_PRODUCT_TO_CART", payload: x });
+  };
+  // function RenderFunc() {
     return (
       <div>
         Veg Products
@@ -65,8 +76,9 @@ const Veg = () => {
     <Card.Text>{(x.veg)  ? "Veg" : "Non Veg"}</Card.Text>
     <Card.Text>{x.description}</Card.Text>
     <div> 
-    <Button onClick={() => addToCart({x})} variant="danger" className="w-100 btns">Add to cart </Button>
+    <Button  onClick={() => handlecart( x )} variant="danger" className="w-100 btns">Add to cart </Button>
     <Button variant="danger" className="w-100">Favourites </Button>
+
     </div>
    </Card.Body>
   </Card>
@@ -75,6 +87,6 @@ const Veg = () => {
       </div>
     );
   }
-  return <RenderFunc />;
-};
+  // return <RenderFunc />;
+// };
 export default Veg;

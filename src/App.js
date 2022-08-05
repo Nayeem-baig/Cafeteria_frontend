@@ -8,10 +8,13 @@ import Favourites from './components/favourites';
 import AddItem from './components/Admin/AddItem';
 import Veg from './components/veg';
 import Nonveg from './components/Vonveg';
+import UserCart from './components/UserCart';
+
 
 
 function App() {
   return ( 
+    // <CartProvider>
     <BrowserRouter>
     <Routes>
       <Route path="/register" element={<Register/>}/>
@@ -22,8 +25,10 @@ function App() {
       <Route path="/addItems" element={<AddItem/>}/>
       <Route path="/product/veg" element={<Veg/>}/>
       <Route path="/product/nonveg" element={<Nonveg/>}/>
+      <Route path="/user/cart" element={<UserCart/>}/>
     </Routes>
     </BrowserRouter>
+    // </CartProvider>
 )}
 
 export default App;
