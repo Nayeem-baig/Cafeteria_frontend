@@ -7,10 +7,23 @@ import Image from "react-bootstrap/Image";
 import styles from "./Product.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Product = () => {
-  const cartData = useSelector((state) => state?.CartReduser)
-  console.log("cartData",cartData);
+  const token = localStorage.getItem("token");
+  const notify = (noti) =>
+    toast.info(noti, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+    });
+  const cartData = useSelector((state) => state?.CartReduser);
+  console.log("cartData", cartData);
   const dispatch = useDispatch();
   const [recommended, setRecommended] = useState([]);
   let userFavs;
@@ -26,7 +39,6 @@ const Product = () => {
   }, []);
 
   const loadrecommended = async () => {
-    const token = localStorage.getItem("token");
     var axios = require("axios");
 
     var config = {
@@ -55,8 +67,6 @@ const Product = () => {
     loadProducts();
   }, []);
 
-  const token = localStorage.getItem("token");
-
   const loadProducts = async () => {
     var config = {
       method: "get",
@@ -76,11 +86,36 @@ const Product = () => {
       });
   };
 
-  function handleFav() {
-    navigate("users/display_favourites");
+  function handleFav(x) {
+    var axios = require("axios");
+    var data = JSON.stringify({
+      id: x._id,
+    });
+
+    var config = {
+      method: "post",
+      url: "http://localhost:4000/users/add_favourites",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response);
+        notify(x.name+" Added to favourites");
+      })
+      .catch(function (error) {
+        if ((error = 409)) {
+          notify("Something went wrong. Please try again.");
+        } else console.log(error);
+      });
   }
   const handlecart = (x) => {
     dispatch({ type: "ADD_PRODUCT_TO_CART", payload: x });
+    notify(x.name + "Added to your cart")
   };
   function RenderFunc() {
     return (
@@ -125,7 +160,6 @@ const Product = () => {
                   <Card.Text>{x.veg ? "Veg" : "Non Veg"}</Card.Text>
                   <Card.Text>{x.description}</Card.Text>
                   <div>
-
                     <Button
                       onClick={() => handlecart(x)}
                       variant="danger"
@@ -133,8 +167,12 @@ const Product = () => {
                     >
                       Add to cart{" "}
                     </Button>
-                    <Button variant="danger" className="w-100">
-                      Favourites{" "}
+                    <Button
+                      onClick={() => handleFav(x)}
+                      variant="danger"
+                      className="w-100"
+                    >
+                      Add to Favourites{" "}
                     </Button>
                   </div>
                 </Card.Body>
@@ -166,14 +204,19 @@ const Product = () => {
                     >
                       Add to cart{" "}
                     </Button>
-                    <Button variant="danger" className="w-100">
-                      Favourites{" "}
+                    <Button
+                      onClick={() => handleFav(x)}
+                      variant="danger"
+                      className="w-100"
+                    >
+                      Add to Favourites{" "}
                     </Button>
                   </div>
                 </Card.Body>
               </Card>
             </div>
           ))}
+        <ToastContainer />
       </div>
     );
   }

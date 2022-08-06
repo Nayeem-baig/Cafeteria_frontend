@@ -1,9 +1,20 @@
-import React from 'react'
+import React from "react";
 import { useState } from "react";
-import { Button } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Button } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Login.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
+  const notify = (noti) => toast.info(noti, {
+position: "top-right",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: false,
+draggable: false,
+progress: undefined,
+});
   const navigate = useNavigate();
   const [userLogin, setUserLogin] = useState({
     email: "",
@@ -18,44 +29,41 @@ const Login = () => {
   const handleSubmit = (event) => {
     const newRecord = { ...userLogin };
   };
- const handleLogin = (issuceful) => {
-    if(issuceful){
-      navigate('/product')
+  const handleLogin = (issuceful) => {
+    if (issuceful) {
+      navigate("/product");
     }
   };
-
   const PostData = async (event) => {
     event.preventDefault();
-    const { email, password} = userLogin;
+    const { email, password } = userLogin;
 
-    var axios = require('axios');
+    var axios = require("axios");
     var data = JSON.stringify({
-      email : email,
-      password : password
+      email: email,
+      password: password,
     });
-    
+
     var config = {
-      method: 'post',
-      url: 'http://localhost:4000/users/login',
-      headers: { 
-        'Content-Type': 'application/json'
+      method: "post",
+      url: "http://localhost:4000/users/login",
+      headers: {
+        "Content-Type": "application/json",
       },
-      data : data
+      data: data,
     };
-    
+
     axios(config)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-      localStorage.setItem('token', (response.data))
-      const succeful = 1;
-      handleLogin(succeful);
-    })
-    .catch(function (error) {
-      console.log(error);
-      alert(error)
-    });
-    
-    
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        localStorage.setItem("token", response.data);
+        const succeful = 1;
+        handleLogin(succeful);
+      })
+      .catch(function (error) {
+        console.log(error);
+        notify("Login unsucceful")
+      });
   };
 
   return (
@@ -87,16 +95,21 @@ const Login = () => {
             placeholder="Password"
             autoComplete="on"
           ></input>
-        </div >
+        </div>
         <div>
-        <Button className="wd-100" onClick={PostData}>Login</Button>
+          <Button className="wd-100" onClick={PostData}>
+            Login
+          </Button>
         </div>
       </form>
-      <div className='create'>
-        <p className='create'>Don't have an account ?<Link to="/register"> Register</Link></p>
+      <div className="create">
+        <p className="create">
+          Don't have an account ?<Link to="/register"> Register</Link>
+        </p>
+        <ToastContainer/>
       </div>
     </div>
   );
 };
 
-export default Login
+export default Login;

@@ -5,7 +5,6 @@ const CartReduser = (state = [], action) => {
             case "REMOVE_PRODUCT_TO_CART":
                 return state.filter((e) => {
                     return e?._id !== action?.payload;
-                    
                 });
                 default:
                     return state;
