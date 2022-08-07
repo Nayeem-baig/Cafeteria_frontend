@@ -97,12 +97,6 @@ const Nonveg = () => {
     return (
       <div>
         Nonveg Products
-        <ul>
-          <li>
-            {" "}
-            <NavLink to="/product">View All</NavLink> <t />
-          </li>
-        </ul>
         {product.length > 0 &&
           product.map((x) => (
             <div>

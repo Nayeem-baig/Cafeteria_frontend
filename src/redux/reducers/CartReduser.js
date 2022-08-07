@@ -1,15 +1,15 @@
 const CartReduser = (state = [], action) => {
-    switch (action.type) {
-        case "ADD_PRODUCT_TO_CART":
-            return state.concat(action.payload);
-            case "REMOVE_PRODUCT_TO_CART":
-                return state.filter((e) => {
-                    return e?._id !== action?.payload;
-                });
-                default:
-                    return state;
-                }
-            };
+  switch (action.type) {
+    case "ADD_PRODUCT_TO_CART":
+      return state.concat(action.payload);
+    case "REMOVE_PRODUCT_TO_CART":
+      return state.filter((e) => {
+        return e?._id !== action?.payload;
+      });
+    default:
+      return state;
+  }
+};
 export default CartReduser;
 
 // case 'ADD_PRODUCT_TO_CART':

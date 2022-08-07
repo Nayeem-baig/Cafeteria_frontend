@@ -1,7 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import styles from "./Product.css";
@@ -9,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 
 const Product = () => {
   const token = localStorage.getItem("token");
@@ -121,7 +127,8 @@ const Product = () => {
     return (
       <div>
         Products
-        <ul>
+       
+        {/* <ul>
           <li>
             {" "}
             <NavLink to="/users/display_favourites">
@@ -139,17 +146,17 @@ const Product = () => {
             <NavLink to="/profile">Profile</NavLink>
           </li>
           <li>
-            <NavLink to="/user/cart">Cart</NavLink>
+            <NavLink to="/user/cart">Cart <>{cartData.length}</></NavLink>
           </li>
-        </ul>
-        <div>
+        </ul> */}
+        <div >
           <p>Recommended</p>
         </div>
         {recommended.length > 0 &&
           recommended.map((x) => (
-            <div>
+            <div >
               <Card className="bgcard" style={{ minWidth: "400px" }}>
-                <Card.Body>
+                <Card.Body >
                   <Card.Img
                     className="card-img-top"
                     variant="top"
@@ -163,14 +170,14 @@ const Product = () => {
                     <Button
                       onClick={() => handlecart(x)}
                       variant="danger"
-                      className="w-100 btns"
+                      className="w-100 btns buttons cartBtn"
                     >
                       Add to cart{" "}
                     </Button>
                     <Button
                       onClick={() => handleFav(x)}
                       variant="danger"
-                      className="w-100"
+                      className="w-100 buttons"
                     >
                       Add to Favourites{" "}
                     </Button>

@@ -93,12 +93,6 @@ const Favourites = () => {
     return (
       <div>
         Favourites
-        <ul>
-          <li>
-            {" "}
-            <NavLink to="/product">View All</NavLink> <t />
-          </li>
-        </ul>
         {favourites.length > 0 &&
           favourites.map((x) => (
             <div>

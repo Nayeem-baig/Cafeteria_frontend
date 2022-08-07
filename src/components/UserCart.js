@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { unstable_HistoryRouter } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import Checkout from "./Checkout_btn"
 
 const UserCart = () => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const cartData = useSelector((state) => state?.CartReduser);
-  console.log("cartData", cartData);
 
   useEffect(() => {
     const unloadCallback = (event) => {
@@ -33,13 +32,8 @@ const UserCart = () => {
   };
   return (
     <div>
-      User cart
-      <ul>
-        <li>
-          {" "}
-          <NavLink to="/product">View All</NavLink> <t />
-        </li>
-      </ul>
+    <div>
+      Cart
       {cartData.length > 0 &&
         cartData.map((x) => (
           <div>
@@ -67,6 +61,8 @@ const UserCart = () => {
             </Card>
           </div>
         ))}
+    </div>
+    <Checkout/>
     </div>
   );
 };
