@@ -3,12 +3,16 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
-import { NavLink , useNavigate } from "react-router-dom";
 import styles from "./Product.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Navi from "./Navi";
+import { Nav } from "react-bootstrap";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const Favourites = () => {
   const notify = (noti) =>
@@ -77,7 +81,7 @@ const Favourites = () => {
 
     axios(config)
       .then(function (response) {
-        notify(x.name + " Removed from your favourites")
+        notify(x.name + " Removed from your favourites");
         console.log(JSON.stringify(response.data));
         window.location.reload(false);
       })
@@ -92,6 +96,9 @@ const Favourites = () => {
   function RenderFunc() {
     return (
       <div>
+        <div>
+        <Navi/>
+        </div>
         Favourites
         {favourites.length > 0 &&
           favourites.map((x) => (
@@ -127,7 +134,7 @@ const Favourites = () => {
               </Card>
             </div>
           ))}
-                <ToastContainer />
+        <ToastContainer />
       </div>
     );
   }

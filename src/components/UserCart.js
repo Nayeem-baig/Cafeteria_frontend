@@ -5,6 +5,11 @@ import Card from "react-bootstrap/Card";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Checkout from "./Checkout_btn"
+import styles from "./UserCart.css"
+import Navbar from 'react-bootstrap/Navbar';
+import { Nav } from "react-bootstrap";
+import Container from 'react-bootstrap/Container';
+import Navi from "./Navi";
 
 const UserCart = () => {
   let navigate = useNavigate();
@@ -31,23 +36,36 @@ const UserCart = () => {
     console.log(x.x._id)
   };
   return (
+    <div >
     <div>
+    <Navi/>
     <div>
+    </div>
       Cart
       {cartData.length > 0 &&
         cartData.map((x) => (
-          <div>
+          <div className="itemCont">
             <Card className="bgcard" style={{ minWidth: "400px" }}>
               <Card.Body>
+                <div className="itemCont">
                 <Card.Img
                   className="card-img-top"
                   variant="top"
                   src={require("../assets/burger.jpg")}
                 />
+                </div>
+                <div className="itemCont">
                 <Card.Text>{x.name}</Card.Text>
+                </div>
+                <div className="itemCont">
                 <Card.Text>{`₹${x.price}`}</Card.Text>
+                </div>
+                <div className="itemCont">
                 <Card.Text>{x.veg ? "Veg" : "Non Veg"}</Card.Text>
+                </div>
+                <div className="itemCont">
                 <Card.Text>{x.description}</Card.Text>
+                </div>
                 <div className="buttons">
                   <Button
                     onClick={() => handlecart({ x })}

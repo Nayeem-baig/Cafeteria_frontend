@@ -1,8 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
 import styles from "./Profile.css";
+import Navi from "./Navi";
+import Navbar from 'react-bootstrap/Navbar';
+import { Nav } from "react-bootstrap";
+import Container from 'react-bootstrap/Container';
+
 const Profile = () => {
   const [profile, setProfile] = useState([]);
   const navigate = useNavigate();
@@ -40,6 +46,9 @@ const Profile = () => {
   function RenderFunc() {
     return (
       <div>
+            <div>
+            <Navi/>
+    </div>
         <Card style={{ width: "18rem" }} className="container">
         <Card.Img className="profile-img" variant="top" src={require("../assets/profileimg.png")} />
           <div className={styles.pcard}>

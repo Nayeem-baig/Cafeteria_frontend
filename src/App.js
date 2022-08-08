@@ -16,7 +16,6 @@ function App() {
     <div>
     <BrowserRouter>
     {/* {localStorage.getItem('token') !== null && <Navi/>} */}
-    <Navi/>
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

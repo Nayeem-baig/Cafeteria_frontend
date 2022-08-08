@@ -86,7 +86,7 @@ progress: undefined,
         </div>
         <div>
           <input
-            type="text"
+            type="password"
             className="form-control mt-1"
             onChange={handleInput}
             value={userLogin.password}

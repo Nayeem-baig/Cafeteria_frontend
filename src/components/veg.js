@@ -9,6 +9,10 @@ import Image from "react-bootstrap/Image";
 import styles from "./Product.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Navbar from 'react-bootstrap/Navbar';
+import { Nav } from "react-bootstrap";
+import Container from 'react-bootstrap/Container';
+import Navi from "./Navi";
 const Veg = () => {
   const notify = (noti) =>
     toast.info(noti, {
@@ -21,6 +25,8 @@ const Veg = () => {
       progress: undefined,
     });
   const cartData = useSelector((state) => state?.CartReduser);
+  const favourites = useSelector((state) => state?.FavouritesReduser);
+  const updates = useSelector((state) => state?.UpdatesReduser);
   console.log("cartData", cartData);
   const dispatch = useDispatch();
   const [product, setProduct] = useState([]);
@@ -29,14 +35,19 @@ const Veg = () => {
 
   useEffect(() => {
     loadProducts();
+    loadFavouritess();
     const unloadCallback = (event) => {
       event.preventDefault();
       event.returnValue = "";
       return "";
     };
     window.addEventListener("beforeunload", unloadCallback);
+    setTimeout(() => {
+      dispatch({type:'CLEAR_UPDATES'})
+    }, 1000);
     return () => window.removeEventListener("beforeunload", unloadCallback);
-  }, []);
+
+  }, [updates]);
 
   const token = localStorage.getItem("token");
   function handleFav(x) {
@@ -87,52 +98,159 @@ const Veg = () => {
       });
   };
 
+  const loadFavouritess = async () => {
+    var config = {
+      method: "get",
+      url: "http://localhost:4000/users/display_favourites",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        // userFavs = response.data ;
+        // setFavourites(userFavs);
+        dispatch({ type: "GET_FAV_LIST", payload: response.data });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  function handleFav(x) {
+    var axios = require("axios");
+    var data = JSON.stringify({
+      id: x._id,
+    });
+   
+
+    var config = {
+      method: "post",
+      url: "http://localhost:4000/users/add_favourites",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response);
+      dispatch({ type: "ADDED", payload: response.data });
+
+        notify(x.name + " Added to favourites");
+      })
+      .catch(function (error) {
+        if ((error = 409)) {
+          notify("Something went wrong. Please try again.");
+        } else console.log(error);
+      });
+  }
+
+  function removeFav(x){
+    var axios = require('axios');
+    var data = JSON.stringify({
+      "id": x
+    });
+    
+    var config = {
+      method: 'delete',
+      url: 'http://localhost:4000/users/del_favourites',
+      headers: { 
+        'Authorization': 'Bearer '+ token, 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      dispatch({ type: "REMOVE", payload: response.data });
+      // console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
+
   const handlecart = (x) => {
     console.log(x);
     dispatch({ type: "ADD_PRODUCT_TO_CART", payload: x });
   };
-  // function RenderFunc() {
+  function RenderFunc() {
   return (
     <div>
+          <div>
+<Navi/>
+    </div>
       Veg Products
       {product.length > 0 &&
         product.map((x) => (
           <div>
-            <Card className="bgcard" style={{ minWidth: "400px" }}>
-              <Card.Body>
-                <Card.Img
-                  className="card-img-top"
-                  variant="top"
-                  src={require("../assets/burger.jpg")}
-                />
-                <Card.Text>{x.name}</Card.Text>
-                <Card.Text>{`₹${x.price}`}</Card.Text>
-                <Card.Text>{x.veg ? "Veg" : "Non Veg"}</Card.Text>
-                <Card.Text>{x.description}</Card.Text>
-                <div>
-                  <Button
-                    onClick={() => handlecart(x)}
-                    variant="danger"
-                    className="w-100 btns"
-                  >
-                    Add to cart{" "}
-                  </Button>
-                  <Button
-                    onClick={() => handleFav(x)}
-                    variant="danger"
-                    className="w-100"
-                  >
-                    Add to Favourites{" "}
-                  </Button>
-                </div>
-              </Card.Body>
-            </Card>
-          </div>
+          <Card className="bgcard" style={{ minWidth: "400px" }}>
+            <Card.Body>
+              <Card.Img
+                className="card-img-top"
+                variant="top"
+                src={require("../assets/burger.jpg")}
+              />
+              <Card.Text>{x.name}</Card.Text>
+              <Card.Text>{`₹${x.price}`}</Card.Text>
+              <Card.Text>{x.veg ? "Veg" : "Non Veg"}</Card.Text>
+              <Card.Text>{x.description}</Card.Text>
+              <div>
+              {cartData.filter((d) => d._id == x._id).length === 1 ? (
+                        <div>
+                        <Button
+                        // onClick={() => }
+                        variant="danger"
+                        className="w-100 buttons">
+                        +
+                      </Button>
+                      <Button
+                        // onClick={() =>}
+                        variant="danger"
+                        className="w-100 buttons">
+                      -
+                      </Button>
+                      </div>
+                    ) : (
+                      <Button
+                      onClick={() => handlecart(x)}
+                        variant="danger"
+                        className="w-100 buttons"
+                      >
+                        Add to cart
+                      </Button>
+                    )}
+                {favourites.filter((d) => d._id === x._id).length === 1 ? (
+                      <Button
+                        onClick={() => removeFav(x._id)}
+                        variant="danger"
+                        className="w-100 buttons"
+                      >
+                        Remove from Favourites
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => handleFav(x)}
+                        variant="danger"
+                        className="w-100 buttons"
+                      >
+                        Add to Favourites
+                      </Button>
+                    )}
+              </div>
+            </Card.Body>
+          </Card>
+        </div>
         ))}
       <ToastContainer />
     </div>
   );
 };
-// return <RenderFunc />;
-// };
+return <RenderFunc />;
+};
 export default Veg;
