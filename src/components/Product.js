@@ -173,12 +173,11 @@ const Product = () => {
   function RenderFunc() {
     return (
       <div>
-        <div>
+         <div>
         <Navi/>
         </div>
         Products
         <div>
-          <div></div>
           <p>Recommended</p>
         </div>
         {recommended.length > 0 &&
@@ -314,6 +313,6 @@ const Product = () => {
       </div>
     );
   }
-  return <RenderFunc />;
+ return <RenderFunc/>
 };
 export default Product;

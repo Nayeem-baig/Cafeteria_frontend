@@ -10,6 +10,7 @@ import Veg from "./components/veg";
 import Nonveg from "./components/Vonveg";
 import UserCart from "./components/UserCart";
 import Navi from "./components/Navi";
+import Dummy from "./components/dummyproduct";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/product/veg" element={<Veg />} />
         <Route path="/product/nonveg" element={<Nonveg />} />
         <Route path="/user/checkout" element={<UserCart />} />
+        <Route path="/dummy" element={<Dummy />} />
       </Routes>
     </BrowserRouter>
     </div>
