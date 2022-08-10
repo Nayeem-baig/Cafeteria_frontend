@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navi from "./Navi";
-import { Nav } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -35,13 +35,13 @@ const Favourites = () => {
   let item;
   useEffect(() => {
     loadFavouritess();
-    // const unloadCallback = (event) => {
-    //   event.preventDefault();
-    //   event.returnValue = "";
-    //   return "";
-    // };
-    // window.addEventListener("beforeunload", unloadCallback);
-    // return () => window.removeEventListener("beforeunload", unloadCallback);
+    const unloadCallback = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+      return "";
+    };
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => window.removeEventListener("beforeunload", unloadCallback);
   }, []);
 
   const loadFavouritess = async () => {
@@ -57,16 +57,17 @@ const Favourites = () => {
       .then(function (response) {
         userFavs = response.data;
         setFavourites(userFavs);
+        console.log("userFavs",userFavs)
       })
       .catch(function (error) {
         console.log(error);
       });
   };
 
-  const removeFav = (x) => {
+  const removeFav = (product) => {
     var axios = require("axios");
     var data = JSON.stringify({
-      id: x._id,
+      id: product._id,
     });
 
     var config = {
@@ -81,7 +82,7 @@ const Favourites = () => {
 
     axios(config)
       .then(function (response) {
-        notify(x.name + " Removed from your favourites");
+        notify(product.name + " Removed from your favourites");
         console.log(JSON.stringify(response.data));
         window.location.reload(false);
       })
@@ -89,9 +90,12 @@ const Favourites = () => {
         console.log(error);
       });
   };
-  const handlecart = (x) => {
-    dispatch({ type: "ADD_PRODUCT_TO_CART", payload: x });
+  const handlecart = (product) => {
+    dispatch({ type: "ADD_PRODUCT_TO_CART", payload: product });
   };
+  const removeCart = (product) => {
+    dispatch({type: "REMOVE_PRODUCT_FROM_CART", payload : product})
+  }
   console.log(favourites);
   function RenderFunc() {
     return (
@@ -99,41 +103,60 @@ const Favourites = () => {
         <div>
         <Navi/>
         </div>
-        Favourites
-        {favourites.length > 0 &&
-          favourites.map((x) => (
-            <div>
-              <Card className="bgcard" style={{ minWidth: "400px" }}>
+       <div className="titles">Favourites</div> 
+        <Row>
+        {favourites.length == 0  ? <h1 style={{margin:"50px"}}> Add items to Favourites! </h1> : 
+        <div>{favourites.length > 0 &&
+          favourites.map((product) => (
+            <Col lg="3">
+               <div>
+              <Card className="wd-100" style={{ minWidth: "300px" }}>
                 <Card.Body>
                   <Card.Img
                     className="card-img-top"
                     variant="top"
                     src={require("../assets/burger.jpg")}
                   />
-                  <Card.Text>{x.name}</Card.Text>
-                  <Card.Text>{`₹${x.price}`}</Card.Text>
-                  <Card.Text>{x.veg ? "Veg" : "Non Veg"}</Card.Text>
-                  <Card.Text>{x.description}</Card.Text>
+                  <Card.Text>{product.name}</Card.Text>
+                  <Card.Text>{`₹${product.price}`}</Card.Text>
+                  <Card.Text>{product.veg ? "Veg" : "Non Veg"}</Card.Text>
+                  <Card.Text>{product.description}</Card.Text>
                   <div>
-                    <Button
-                      onClick={() => handlecart(x)}
-                      variant="danger"
-                      className="w-100 btns"
-                    >
-                      Add to cart{" "}
+                  {cartData.filter((d) => d._id == product._id).length === 1 ? (
+                        <div className="btns">
+                        <Button
+                        onClick={() => removeCart(product._id) }
+                        variant="light"
+                        className="w-100 buttons">
+                        Remove from cart
                     </Button>
-                    <Button
-                      onClick={() => removeFav(x)}
-                      variant="danger"
-                      className="w-100"
-                    >
-                      Remove Favourite
-                    </Button>
+                      </div>
+                    ) : (
+                      <Button
+                      onClick={() => handlecart(product)}
+                        variant="danger"
+                        className="w-100 buttons"
+                      >
+                        Add to cart
+                      </Button>
+                    )}
+                    
+                      <Button
+                        onClick={() => removeFav(product)}
+                        variant="light"
+                        className="w-100 buttons"
+                      >
+                        Remove from Favourites
+                      </Button>
                   </div>
                 </Card.Body>
               </Card>
             </div>
+            </Col>
           ))}
+          </div>
+          }
+          </Row>
         <ToastContainer />
       </div>
     );

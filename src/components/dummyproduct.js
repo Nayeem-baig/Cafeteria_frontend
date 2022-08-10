@@ -5,10 +5,9 @@ import Card from "react-bootstrap/Card";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Image from "react-bootstrap/Image";
-import styles from "./dummy.css";
 import { Button } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 import Navi from "./Navi";
 const Dummy = () => {
   const notify = (noti) =>
@@ -38,11 +37,11 @@ const Dummy = () => {
       event.returnValue = "";
       return "";
     };
-    window.addEventListener("beforeunload", unloadCallback);
-    setTimeout(() => {
-      dispatch({ type: "CLEAR_UPDATES" });
-    }, 1000);
-    return () => window.removeEventListener("beforeunload", unloadCallback);
+    // window.addEventListener("beforeunload", unloadCallback);
+    // setTimeout(() => {
+    //   dispatch({ type: "CLEAR_UPDATES" });
+    // }, 1000);
+    // return () => window.removeEventListener("beforeunload", unloadCallback);
   }, [updates]);
 
   const token = localStorage.getItem("token");
@@ -201,7 +200,7 @@ const Dummy = () => {
                     <div className="price">₹. {x.price}/-</div>
                     <div className="buttons">
                       <div>
-                        {cartData.filter((d) => d._id == x._id).length === 1 ? (
+                        {cartData.filter((d) => d._id === x._id).length === 1 ? (
                           <div className="plusminus">
                             <Button
                               variant="light"

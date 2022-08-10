@@ -7,7 +7,7 @@ const Checkout_btn = () => {
   console.log(cartData)
   const amt=() =>{
     for(let i = 0 ; i < cartData.length ; i++){
-      amount = amount + cartData[i].price
+      amount = amount + cartData[i].price * cartData[i].cartQuantity;
     }
     return amount;
   };
@@ -16,7 +16,7 @@ const Checkout_btn = () => {
       <Button variant="danger" className="w-100 btns">
         Checkout {cartData.length}
       </Button>
-      <p>Total Amount {amt()}</p>
+      <p className="titles">Total Amount: ₹{amt()}/-</p>
     </div>
   );
 };

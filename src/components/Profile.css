@@ -1,8 +1,8 @@
-div{
+/* div{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+} */
 .container{
     border-radius: 35px;
     box-shadow: 5px 5px 5px  #888888;

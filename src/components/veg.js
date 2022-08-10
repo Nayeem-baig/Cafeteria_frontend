@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from 'react-bootstrap/Navbar';
 import { Nav } from "react-bootstrap";
 import Container from 'react-bootstrap/Container';
+import { Row, Col } from "reactstrap";
 import Navi from "./Navi";
 const Veg = () => {
   const notify = (noti) =>
@@ -174,7 +175,9 @@ const Veg = () => {
     });
     
   }
-
+  const removeCart = (product) => {
+    dispatch({type: "REMOVE_PRODUCT_FROM_CART", payload : product})
+  }
   const handlecart = (x) => {
     console.log(x);
     dispatch({ type: "ADD_PRODUCT_TO_CART", payload: x });
@@ -185,68 +188,78 @@ const Veg = () => {
           <div>
 <Navi/>
     </div>
+    <div className="titles">
       Veg Products
-      {product.length > 0 &&
-        product.map((x) => (
-          <div>
-          <Card className="bgcard" style={{ minWidth: "400px" }}>
-            <Card.Body>
-              <Card.Img
-                className="card-img-top"
-                variant="top"
-                src={require("../assets/burger.jpg")}
-              />
-              <Card.Text>{x.name}</Card.Text>
-              <Card.Text>{`₹${x.price}`}</Card.Text>
-              <Card.Text>{x.veg ? "Veg" : "Non Veg"}</Card.Text>
-              <Card.Text>{x.description}</Card.Text>
+    </div>
+      <Row>
+          {product.length > 0 &&
+            product.map((product) => (
+                <Col lg="3">
               <div>
-              {cartData.filter((d) => d._id == x._id).length === 1 ? (
-                        <div>
-                        <Button
-                        // onClick={() => }
-                        variant="danger"
-                        className="w-100 buttons">
-                        +
-                      </Button>
-                      <Button
-                        // onClick={() =>}
-                        variant="danger"
-                        className="w-100 buttons">
-                      -
-                      </Button>
+                  <Card
+                    className="wd-100 flexRow"
+                    style={{ minWidth: "300px" }}
+                  >
+                    <Card.Body>
+                      <Card.Img
+                        className="card-img-top"
+                        variant="top"
+                        src={require("../assets/burger.jpg")}
+                      />
+                      <Card.Text className="text">{product.name}</Card.Text>
+                      <Card.Text className="text">{`₹${product.price}`}</Card.Text>
+                      <Card.Text className="text">
+                        {product.veg ? "Veg" : "Non Veg"}
+                      </Card.Text>
+                      <Card.Text className="text">
+                        {product.description}
+                      </Card.Text>
+                      <div>
+                        {cartData.filter((d) => d._id == product._id).length ===
+                        1 ? (
+                          <div className="btns">
+                            <Button
+                              onClick={() => removeCart(product._id)}
+                              variant="light"
+                              className="w-100 buttons"
+                            >
+                              Remove from cart
+                            </Button>
+                          </div>
+                        ) : (
+                          <Button
+                            onClick={() => handlecart(product)}
+                            variant="danger"
+                            className="w-100 buttons"
+                          >
+                            Add to cart
+                          </Button>
+                        )}
+                        {favourites.filter((d) => d._id === product._id)
+                          .length === 1 ? (
+                          <Button
+                            onClick={() => removeFav(product._id)}
+                            variant="light"
+                            className="w-100 buttons"
+                          >
+                            Remove from Favourites
+                          </Button>
+                        ) : (
+                          <Button
+                            onClick={() => handleFav(product)}
+                            variant="danger"
+                            className="w-100 buttons"
+                          >
+                            Add to Favourites
+                          </Button>
+                        )}
                       </div>
-                    ) : (
-                      <Button
-                      onClick={() => handlecart(x)}
-                        variant="danger"
-                        className="w-100 buttons"
-                      >
-                        Add to cart
-                      </Button>
-                    )}
-                {favourites.filter((d) => d._id === x._id).length === 1 ? (
-                      <Button
-                        onClick={() => removeFav(x._id)}
-                        variant="danger"
-                        className="w-100 buttons"
-                      >
-                        Remove from Favourites
-                      </Button>
-                    ) : (
-                      <Button
-                        onClick={() => handleFav(x)}
-                        variant="danger"
-                        className="w-100 buttons"
-                      >
-                        Add to Favourites
-                      </Button>
-                    )}
+                    </Card.Body>
+                  </Card>
               </div>
-            </Card.Body>
-          </Card>
-        </div>
-        ))}
+                </Col>
+            ))}
+        </Row>
       <ToastContainer />
     </div>
   );

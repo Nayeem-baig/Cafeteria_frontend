@@ -1,50 +1,49 @@
-* {
-  font-family: "Nunito", sans-serif;
+ /* * {
+   font-family: "Nunito", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   outline: none;
   border: none;
-  text-decoration: none;
+  text-decoration: none; 
   transition: all 0.2s linear;
   text-transform: capitalize;
 
-  /* font-size: 62.5%; */
-}
+   font-size: 62.5%; 
+ } 
 
-body {
+ body {
   background: #eee;
   font-size: 62.5%;
   overflow-x: hidden;
-}
+} 
 
-.container {
+ .container {
   margin: 0 auto;
   padding: 3rem 2rem;
-}
+} 
 
-.container .title {
+ .container .title {
   font-size: 3.5rem;
   color: #444;
   margin-bottom: 3rem;
   text-transform: uppercase;
   text-align: center;
-}
+} 
 
-.container .products-container {
-  display: grid;
-  /* grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr)); */
+ .container .products-container {
+  display: block;
   gap: 2rem;
-}
+} 
 
 .container .products-container .product {
-  text-align: center;
+   text-align: center;
   padding: 3rem 2rem;
-  background: #fff;
+  background: #fff; 
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   outline: 0.1rem solid #ccc;
   outline-offset: -1.5rem;
-  cursor: pointer;
+   cursor: pointer; 
   
 }
 
@@ -91,11 +90,11 @@ body {
   width: fit-content;
   height: fit-content;
 }
-.plusminus {
+ .plusminus {
   display: flex;
   flex-direction: row;
-}
-/* 
+} 
+ 
 .products-preview .preview {
   display: none;
   padding: 2rem;
@@ -103,68 +102,69 @@ body {
   background: #fff;
   position: relative;
   margin: 2rem;
-  width: 40rem;
-} */
+  width: 30%;
+} 
 
-/* .products-preview .preview.active {
-  display: inline-block;
-} */
-/* 
+ .products-preview .preview.active {
+  display: flex;
+} 
+ 
 .products-preview .preview img {
   height: 30rem;
-} */
+} 
 
-/* .products-preview .preview .fa-times {
+ .products-preview .preview .fa-times {
   position: absolute;
   top: 1rem;
   right: 1.5rem;
   cursor: pointer;
   color: #444;
   font-size: 4rem;
-} */
+} 
 
-/* .products-preview .preview .fa-times:hover {
+ .products-preview .preview .fa-times:hover {
   transform: rotate(90deg);
-} */
+} 
 
-/* .products-preview .preview h3 {
+ .products-preview .preview h3 {
   color: #444;
   padding: 0.5rem 0;
   font-size: 2.5rem;
-} */
+} 
 
-/* .products-preview .preview .stars {
+ .products-preview .preview .stars {
   padding: 1rem 0;
   font-size: 1.7rem;
 }
 
 .products-preview .preview .stars i {
   color: #27ae60;
-} */
+} 
 
-/* .products-preview .preview .stars span {
+ .products-preview .preview .stars span {
   color: #999;
-} */
+} 
 
-/* .products-preview .preview p {
+ .products-preview .preview p {
   line-height: 1.5;
   padding: 1rem 0;
   font-size: 1.6rem;
   color: #777;
-} */
+} 
 
-/* .products-preview .preview .price {
+ .products-preview .preview .price {
   padding: 1rem 0;
   font-size: 2.5rem;
   color: #27ae60;
-} */
+} 
 
-/* .products-preview .preview .buttons {
+ .products-preview .preview .buttons {
   display: flex;
+  flex-direction: row;
   gap: 1.5rem;
   flex-wrap: wrap;
   margin-top: 1rem;
-}
+} 
 
 .products-preview .preview .buttons a {
   flex: 1 1 16rem;
@@ -172,9 +172,9 @@ body {
   font-size: 1.8rem;
   color: #444;
   border: 0.1rem solid #444;
-} */
+} 
 
-/* .products-preview .preview .buttons a.cart {
+ .products-preview .preview .buttons a.cart {
   background: #444;
   color: #fff;
 }
@@ -186,4 +186,4 @@ body {
 .products-preview .preview .buttons a.buy:hover {
   background: #444;
   color: #fff;
-} */
+}   */
