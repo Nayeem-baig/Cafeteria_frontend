@@ -209,7 +209,11 @@ const Veg = () => {
                       <Card.Text className="text">{product.name}</Card.Text>
                       <Card.Text className="text">{`₹${product.price}`}</Card.Text>
                       <Card.Text className="text">
-                        {product.veg ? "Veg" : "Non Veg"}
+                      <img
+                        className="card-img-icon"
+                        variant="top"
+                        src={require("../assets/veg.jpg")}
+                      /> 
                       </Card.Text>
                       <Card.Text className="text">
                         {product.description}

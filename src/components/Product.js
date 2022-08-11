@@ -185,7 +185,7 @@ const Product = () => {
   function RenderFunc() {
     return (
       <div>
-        <Navi />
+    {localStorage.getItem('token') !== null && <Navi/>}
         <div className="titles">
         Products
           <p>Recommended</p>
@@ -203,12 +203,21 @@ const Product = () => {
                       <Card.Img
                         className="card-img-top"
                         variant="top"
-                        src={require("../assets/burger.jpg")}
+                        src={product.img}
                       />
+                      {console.log(" imageeeee",product)}
                       <Card.Text className="text">{product.name}</Card.Text>
                       <Card.Text className="text">{`₹${product.price}`}</Card.Text>
                       <Card.Text className="text">
-                        {product.veg ? "Veg" : "Non Veg"}
+                      {product.veg ?    
+                        <img
+                        className="card-img-icon"
+                        variant="top"
+                        src={require("../assets/veg.jpg")}
+                      /> :    <img
+                      src={require("../assets/nonveg.jpg")}
+                      className="card-img-icon"
+                    />}
                       </Card.Text>
                       <Card.Text className="text">
                         {product.description}
@@ -280,7 +289,15 @@ const Product = () => {
                       <Card.Text className="text">{product.name}</Card.Text>
                       <Card.Text className="text">{`₹${product.price}`}</Card.Text>
                       <Card.Text className="text">
-                        {product.veg ? "Veg" : "Non Veg"}
+                        {product.veg ?    
+                        <img
+                        className="card-img-icon"
+                        variant="top"
+                        src={require("../assets/veg.jpg")}
+                      /> :    <img
+                      src={require("../assets/nonveg.jpg")}
+                      className="card-img-icon"
+                    />}
                       </Card.Text>
                       <Card.Text className="text">
                         {product.description}

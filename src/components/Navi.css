@@ -8,13 +8,15 @@
 }
 .navItems{
     background: linear-gradient(#1095c1 0 0) var(--p, 0) / var(--p, 0) no-repeat;
+    border-radius: 20%;
+    padding: 2px;
     transition: 0.4s;
     margin: 0px 50px 0px 50px; 
 }
 .navItems:hover{
     --p: 100%;
     color: #fff;
-    text-decoration: none;
+    text-decoration: none;      
     text-rendering: optimizeSpeed;
 }
 .sticky{

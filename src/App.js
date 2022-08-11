@@ -16,18 +16,19 @@ function App() {
   return (
     <div>
     <BrowserRouter>
+    {/* {localStorage.getItem('token') === null && <Login/>} */}
     {/* {localStorage.getItem('token') !== null && <Navi/>} */}
       <Routes>
-        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/product" element={<Product />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/users/display_favourites" element={<Favourites />} />
-        <Route path="/addItems" element={<AddItem />} />
+        {/* <Route path="/addItems" element={<AddItem />} /> */}
         <Route path="/product/veg" element={<Veg />} />
         <Route path="/product/nonveg" element={<Nonveg />} />
         <Route path="/user/checkout" element={<UserCart />} />
-        <Route path="/dummy" element={<Dummy />} />
+        {/* <Route path="/dummy" element={<Dummy />} /> */}
       </Routes>
     </BrowserRouter>
     </div>

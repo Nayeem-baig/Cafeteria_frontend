@@ -5,8 +5,17 @@
 }
 .card-img-top {
   width: 100%;
-  height: 15vw;
+  height: 100px;
   object-fit: cover;
+}
+.card-img-cart {
+  size: 150px;
+  object-fit: cover;
+}
+
+.card-img-icon{
+  width: 20px;
+  height: 20px;
 }
 .cartBtn {
   margin-bottom: 20px;
@@ -19,12 +28,17 @@
 .buttons:hover {
   transform: translateY(-0.25em);
 }
+.center{
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
 .text{
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0%;
-  margin: 0%;
+  margin: 2%;
 }
 .border{
   border: px solid #1095c1;
@@ -33,11 +47,21 @@
   display: flex;
   flex-direction: row;
 }
+.m-10{
+  margin: 10px;
+}
 .titles{
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 5%;
+  font-size: large;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.titlesCart{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-size: large;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
