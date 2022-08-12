@@ -35,13 +35,13 @@ const Favourites = () => {
   let item;
   useEffect(() => {
     loadFavouritess();
-    const unloadCallback = (event) => {
-      event.preventDefault();
-      event.returnValue = "";
-      return "";
-    };
-    window.addEventListener("beforeunload", unloadCallback);
-    return () => window.removeEventListener("beforeunload", unloadCallback);
+    // const unloadCallback = (event) => {
+    //   event.preventDefault();
+    //   event.returnValue = "";
+    //   return "";
+    // };
+    // window.addEventListener("beforeunload", unloadCallback);
+    // return () => window.removeEventListener("beforeunload", unloadCallback);
   }, []);
 
   const loadFavouritess = async () => {
@@ -107,8 +107,8 @@ const Favourites = () => {
        <Row>
           {favourites.length > 0 &&
             favourites.map((product) => (
-                <Col lg="3">
-              <div>
+              <Col lg="3">
+                <div>
                   <Card
                     className="wd-100 flexRow"
                     style={{ minWidth: "300px" }}
@@ -117,26 +117,31 @@ const Favourites = () => {
                       <Card.Img
                         className="card-img-top"
                         variant="top"
-                        src={require("../assets/burger.jpg")}
+                        src={product.img}
                       />
                       <Card.Text className="text">{product.name}</Card.Text>
                       <Card.Text className="text">{`₹${product.price}`}</Card.Text>
                       <Card.Text className="text">
-                      {product.veg ?    
-                        <img
-                        className="card-img-icon"
-                        variant="top"
-                        src={require("../assets/veg.jpg")}
-                      /> :    <img
-                      src={require("../assets/nonveg.jpg")}
-                      className="card-img-icon"
-                    />}
+                        {product.veg ? (
+                          <img
+                            className="card-img-icon"
+                            variant="top"
+                            src={require("../assets/veg.jpg")}
+                          />
+                        ) : (
+                          <img
+                            src={require("../assets/nonveg.jpg")}
+                            className="card-img-icon"
+                          />
+                        )}
                       </Card.Text>
                       <Card.Text className="text">
                         {product.description}
                       </Card.Text>
+                      {console.log("produuuuuuuuuuuuuuuuuuuuuuuuuuuuuuct",product)}
                       <div>
-                        {cartData.filter((d) => d._id == product._id).length ===
+                        {cartData.filter((d) => d.productID == product._id).length ===
+                        
                         1 ? (
                           <div className="btns">
                             <Button
@@ -157,7 +162,7 @@ const Favourites = () => {
                           </Button>
                         )}
                           <Button
-                            onClick={() => removeFav(product._id)}
+                            onClick={() => removeFav(product)}
                             variant="light"
                             className="w-100 buttons"
                           >
@@ -166,8 +171,8 @@ const Favourites = () => {
                       </div>
                     </Card.Body>
                   </Card>
-              </div>
-                </Col>
+                </div>
+              </Col>
             ))}
         </Row>
         <ToastContainer />

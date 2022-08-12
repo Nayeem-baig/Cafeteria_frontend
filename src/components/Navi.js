@@ -13,21 +13,21 @@ import React from 'react'
 
 const Navi = () => {
   return (
-    <div>
+    <div className="Navigation">
         <Navbar className="container sticky " bg="light" expand="lg" fixed="top">
       <Container fluid>
-        <Navbar.Brand>Online Menu</Navbar.Brand>
+        <Navbar.Brand > <p className="title">Cafeteria❞</p> </Navbar.Brand>
        <Navbar.Toggle  aria-controls="navbarScroll" />
        <Navbar.Collapse id="navbarScroll">
         <Nav
-    className="me-auto my-2 my-lg-0"
+    className="me-auto"
           style={{  }}
            navbarScroll
          >
            <NavLink className='navItems' to={'/product'} >Home</NavLink>
            <NavLink className='navItems' to={'/users/display_favourites'}>Favourites</NavLink>
-           <NavLink className='navItems' to={'/product/nonveg'}>Non Veg</NavLink>
            <NavLink className='navItems' to={'/product/veg'}>Veg</NavLink>
+           {/* <NavLink className='navItems' to={'/product/nonveg'}>Non veg</NavLink> */}
            <NavLink className='navItems' to={'/user/checkout'}>Cart</NavLink>
            <NavLink className='navItems' to={'/profile'}>Account</NavLink>
           </Nav>

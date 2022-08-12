@@ -8,21 +8,27 @@ function decrease(qunatity) {
 const CartReduser = (state = [], action) => {
   switch (action.type) {
     case "ADD_PRODUCT_TO_CART":
-      const tempProduct = { ...action.payload, cartQuantity: 1 };
+      let data = action.payload
+      const tempProduct = { 
+        productID: data._id,
+        name: data.name,
+        description: data.description,
+        price:data.price,
+        category:data.category,
+        veg: data.veg,
+        cartQuantity: 1
+      };
       return state.concat(tempProduct);
     case "ADD":
-      const objIndex = state.findIndex((obj) => obj._id === action.payload);
+      const objIndex = state.findIndex((obj) => obj.productID === action.payload);
       state[objIndex].cartQuantity = increase(state[objIndex].cartQuantity);
       return state;
     case "SUB":
-      const objInde = state.findIndex((obj) => obj._id === action.payload);
-      if (state[objInde].cartQuantity === 0) {
-        // if cartquantity is  1 then replace - button action with REMOVE_PRODUCT_TO_CART if its greater than 1 call decrease function
-      }
+      const objInde = state.findIndex((obj) => obj.productID === action.payload);
       state[objInde].cartQuantity = decrease(state[objInde].cartQuantity);
       return state;
     case "REMOVE_PRODUCT_FROM_CART":
-      return state.filter((e) => e?._id !== action?.payload);
+      return state.filter((e) => e?.productID !== action?.payload);
     default:
       return state;
   }
@@ -31,7 +37,7 @@ export default CartReduser;
 
 // case 'ADD_PRODUCT_TO_CART':
 //     return state.map((d)=> {
-//         if(action.payload._id !== state._id){
+//         if(action.payload.productID !== state.productID){
 //             return state.concat(action.payload)
 //         } else if (state.length == 0 ){
 

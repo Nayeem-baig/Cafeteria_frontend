@@ -38,27 +38,21 @@ const Profile = () => {
         console.log(error);
       });
   };
-
   function logout() {
     localStorage.removeItem("token");
     navigate("/login");
   }
   function RenderFunc() {
     return (
-      <div>
-            <div>
-            <Navi/>
-    </div>
-        <Card style={{ width: "18rem" }} className="container">
+      <div className="align-content-center justify-content-center d-flex">
+        <Card style={{ width: "18rem" }} className="align-content-center justify-content-center">
         <Card.Img className="profile-img" variant="top" src={require("../assets/profileimg.png")} />
-          <div className={styles.pcard}>
-          <Card.Body>
+          <div className="align-content-center justify-content-center">
+          <Card.Body className="align-content-center justify-content-center">
             <Card.Title>Profile</Card.Title>
             <Card.Text> Name: {profile.name}</Card.Text>
             <Card.Text> Phn: +91 {profile.phn}</Card.Text>
             <Card.Text> Email: {profile.email}</Card.Text>
-           
-            
             <Button variant="primary" onClick={logout}>
               Logout
             </Button>

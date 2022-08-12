@@ -213,7 +213,7 @@ const Veg = () => {
                         className="card-img-icon"
                         variant="top"
                         src={require("../assets/veg.jpg")}
-                      /> 
+                      />
                       </Card.Text>
                       <Card.Text className="text">
                         {product.description}

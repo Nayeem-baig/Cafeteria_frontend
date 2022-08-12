@@ -48,7 +48,7 @@ const Dummy = () => {
   function handleFav(x) {
     var axios = require("axios");
     var data = JSON.stringify({
-      id: x._id,
+      id: x.productID,
     });
 
     var config = {
@@ -115,7 +115,7 @@ const Dummy = () => {
   function handleFav(x) {
     var axios = require("axios");
     var data = JSON.stringify({
-      id: x._id,
+      id: x.productID,
     });
 
     var config = {
@@ -200,7 +200,7 @@ const Dummy = () => {
                     <div className="price">₹. {x.price}/-</div>
                     <div className="buttons">
                       <div>
-                        {cartData.filter((d) => d._id === x._id).length === 1 ? (
+                        {cartData.filter((d) => d.productID === x.productID).length === 1 ? (
                           <div className="plusminus">
                             <Button
                               variant="light"
@@ -208,7 +208,7 @@ const Dummy = () => {
                             >
                               +
                             </Button>
-                            {cartData.filter((obj) => obj._id === x._id).length}
+                            {cartData.filter((obj) => obj.productID === x.productID).length}
                             <Button
                               variant="light "
                               className="w-100 btn btn-outline-dark btns"
@@ -225,10 +225,10 @@ const Dummy = () => {
                             Add to cart
                           </Button>
                         )}
-                        {favourites.filter((d) => d._id === x._id).length ===
+                        {favourites.filter((d) => d.productID === x.productID).length ===
                         1 ? (
                           <Button
-                            onClick={() => removeFav(x._id)}
+                            onClick={() => removeFav(x.productID)}
                             variant="light"
                             className="btn btn-outline-dark btns"
                           >
@@ -271,7 +271,7 @@ export default Dummy;
 //       <Card.Text>{x.veg ? "Veg" : "Non Veg"}</Card.Text>
 //       <Card.Text>{x.description}</Card.Text>
 //       <div>
-//       {cartData.filter((d) => d._id == x._id).length === 1 ? (
+//       {cartData.filter((d) => d.productID == x.productID).length === 1 ? (
 //                 <div>
 //                 <Button
 //                 // onClick={() => }
@@ -295,9 +295,9 @@ export default Dummy;
 //                 Add to cart
 //               </Button>
 //             )}
-//         {favourites.filter((d) => d._id === x._id).length === 1 ? (
+//         {favourites.filter((d) => d.productID === x.productID).length === 1 ? (
 //               <Button
-//                 onClick={() => removeFav(x._id)}
+//                 onClick={() => removeFav(x.productID)}
 //                 variant="danger"
 //                 className="w-100 buttons"
 //               >

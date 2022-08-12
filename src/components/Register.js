@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-
 import styles from "./Login.css";
 
 const Register = () => {
@@ -68,7 +67,7 @@ const Register = () => {
   };
 
   return (
-    <div className="Auth-form-container">
+    <div className="body">
       <form method="post" className="Auth-form" onSubmit={handleSubmit}>
         <div className="logo">
           <h1>Register</h1>
@@ -76,19 +75,19 @@ const Register = () => {
         <div>
           <input
             type="text"
-            className="form-control mt-1"
+            className="form-control mt-1 mb-3"
             value={userRegistration.name}
             onChange={handleInput}
             name="name"
             id="name"
-            placeholder="name"
+            placeholder="Name"
             autoComplete="on"
           ></input>
         </div>
         <div>
           <input
             type="text"
-            className="form-control mt-1"
+            className="form-control mt-1 mb-3"
             onChange={handleInput}
             value={userRegistration.username}
             name="username"
@@ -100,7 +99,7 @@ const Register = () => {
         <div>
           <input
             type="text"
-            className="form-control mt-1"
+            className="form-control mt-1 mb-3"
             onChange={handleInput}
             value={userRegistration.email}
             name="email"
@@ -112,7 +111,7 @@ const Register = () => {
         <div>
           <input
             type="text"
-            className="form-control mt-1"
+            className="form-control mt-1 mb-3"
             onChange={handleInput}
             value={userRegistration.password}
             name="password"
@@ -124,7 +123,7 @@ const Register = () => {
         <div>
           <input
             type="number"
-            className="form-control mt-1"
+            className="form-control mt-1 mb-3"
             onChange={handleInput}
             value={userRegistration.phn}
             name="phn"
@@ -133,11 +132,11 @@ const Register = () => {
             autoComplete="on"
           ></input>
         </div>
-        <div>
+        <div className="text-center">
         <Button className="button" onClick={PostData}>Register</Button>
         </div>
       </form>
-      <Link to="/login">Already have an account</Link>
+      <Link to="/login">Already have an account Login</Link>
     </div>
   );
 };

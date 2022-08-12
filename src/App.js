@@ -28,7 +28,6 @@ function App() {
         <Route path="/product/veg" element={<Veg />} />
         <Route path="/product/nonveg" element={<Nonveg />} />
         <Route path="/user/checkout" element={<UserCart />} />
-        {/* <Route path="/dummy" element={<Dummy />} /> */}
       </Routes>
     </BrowserRouter>
     </div>

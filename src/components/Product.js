@@ -15,9 +15,20 @@ import { Nav } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import CartReduser from "../redux/reducers/CartReduser";
 import { Row, Col } from "reactstrap";
+import Veg from "./veg";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import ToggleButton from "react-bootstrap/ToggleButton";
+import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 
 const Product = () => {
   const token = localStorage.getItem("token");
+  const [checked, setChecked] = useState(false);
+  const [radioValue, setRadioValue] = useState("1");
+
+  const radios = [
+    { name: "Active", value: "1" },
+    { name: "Radio", value: "2" },
+  ];
   const notify = (noti) =>
     toast.info(noti, {
       position: "top-right",
@@ -173,11 +184,11 @@ const Product = () => {
     dispatch({ type: "ADD_PRODUCT_TO_CART", payload: product });
     notify(product.name + "Added to your cart");
   };
-  // const increase = (productId) =>{
-  //   dispatch({type: "ADD", payload : productId})
+  // const increase = (_id) =>{
+  //   dispatch({type: "ADD", payload : _id})
   // }
-  // const decrease = (productId) => {
-  //   dispatch({type: "SUB", payload : productId})
+  // const decrease = (_id) => {
+  //   dispatch({type: "SUB", payload : _id})
   // }
   const removeCart = (product) => {
     dispatch({ type: "REMOVE_PRODUCT_FROM_CART", payload: product });
@@ -185,16 +196,16 @@ const Product = () => {
   function RenderFunc() {
     return (
       <div>
-    {localStorage.getItem('token') !== null && <Navi/>}
+        {localStorage.getItem("token") !== null && <Navi />}
         <div className="titles">
-        Products
+          Products
           <p>Recommended</p>
         </div>
         <Row>
           {recommended.length > 0 &&
             recommended.map((product) => (
-                <Col lg="3">
-              <div>
+              <Col lg="3">
+                <div>
                   <Card
                     className="wd-100 flexRow"
                     style={{ minWidth: "300px" }}
@@ -205,25 +216,29 @@ const Product = () => {
                         variant="top"
                         src={product.img}
                       />
-                      {console.log(" imageeeee",product)}
                       <Card.Text className="text">{product.name}</Card.Text>
                       <Card.Text className="text">{`₹${product.price}`}</Card.Text>
                       <Card.Text className="text">
-                      {product.veg ?    
-                        <img
-                        className="card-img-icon"
-                        variant="top"
-                        src={require("../assets/veg.jpg")}
-                      /> :    <img
-                      src={require("../assets/nonveg.jpg")}
-                      className="card-img-icon"
-                    />}
+                        {product.veg ? (
+                          <img
+                            className="card-img-icon"
+                            variant="top"
+                            src={require("../assets/veg.jpg")}
+                          />
+                        ) : (
+                          <img
+                            src={require("../assets/nonveg.jpg")}
+                            className="card-img-icon"
+                          />
+                        )}
                       </Card.Text>
                       <Card.Text className="text">
                         {product.description}
                       </Card.Text>
+                      {/* {console.log("product",product)} */}
                       <div>
-                        {cartData.filter((d) => d._id == product._id).length ===
+                        {cartData.filter((d) => d.productID == product._id).length ===
+                        
                         1 ? (
                           <div className="btns">
                             <Button
@@ -264,8 +279,8 @@ const Product = () => {
                       </div>
                     </Card.Body>
                   </Card>
-              </div>
-                </Col>
+                </div>
+              </Col>
             ))}
         </Row>
         <div className="active">
@@ -274,8 +289,8 @@ const Product = () => {
         <Row>
           {product.length > 0 &&
             product.map((product) => (
-                <Col lg="3">
-              <div>
+              <Col lg="3">
+                <div>
                   <Card
                     className="wd-100 flexRow"
                     style={{ minWidth: "300px" }}
@@ -284,26 +299,31 @@ const Product = () => {
                       <Card.Img
                         className="card-img-top"
                         variant="top"
-                        src={require("../assets/burger.jpg")}
+                        src={product.img}
                       />
                       <Card.Text className="text">{product.name}</Card.Text>
                       <Card.Text className="text">{`₹${product.price}`}</Card.Text>
                       <Card.Text className="text">
-                        {product.veg ?    
-                        <img
-                        className="card-img-icon"
-                        variant="top"
-                        src={require("../assets/veg.jpg")}
-                      /> :    <img
-                      src={require("../assets/nonveg.jpg")}
-                      className="card-img-icon"
-                    />}
+                        {product.veg ? (
+                          <img
+                            className="card-img-icon"
+                            variant="top"
+                            src={require("../assets/veg.jpg")}
+                          />
+                        ) : (
+                          <img
+                            src={require("../assets/nonveg.jpg")}
+                            className="card-img-icon"
+                          />
+                        )}
                       </Card.Text>
                       <Card.Text className="text">
                         {product.description}
                       </Card.Text>
+                      {/* {console.log("product",product)} */}
                       <div>
-                        {cartData.filter((d) => d._id == product._id).length ===
+                        {cartData.filter((d) => d.productID == product._id).length ===
+                        
                         1 ? (
                           <div className="btns">
                             <Button
@@ -344,8 +364,8 @@ const Product = () => {
                       </div>
                     </Card.Body>
                   </Card>
-              </div>
-                </Col>
+                </div>
+              </Col>
             ))}
         </Row>
         <ToastContainer />

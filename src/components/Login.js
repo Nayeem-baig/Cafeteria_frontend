@@ -4,17 +4,8 @@ import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
-  const notify = (noti) => toast.info(noti, {
-position: "top-right",
-autoClose: 5000,
-hideProgressBar: false,
-closeOnClick: true,
-pauseOnHover: false,
-draggable: false,
-progress: undefined,
-});
   const navigate = useNavigate();
   const [userLogin, setUserLogin] = useState({
     email: "",
@@ -37,37 +28,43 @@ progress: undefined,
   const PostData = async (event) => {
     event.preventDefault();
     const { email, password } = userLogin;
-
-    var axios = require("axios");
-    var data = JSON.stringify({
-      email: email,
-      password: password,
-    });
-
-    var config = {
-      method: "post",
-      url: "http://localhost:4000/users/login",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        localStorage.setItem("token", response.data);
-        const succeful = 1;
-        handleLogin(succeful);
-      })
-      .catch(function (error) {
-        console.log(error);
-        notify("Login unsucceful")
+    if (email === "") {
+      toast.error("Please enter email");
+    }else if(password === ""){
+      toast.error("Please enter password");
+    } 
+    else {
+      var axios = require("axios");
+      var data = JSON.stringify({
+        email: email,
+        password: password,
       });
+
+      var config = {
+        method: "post",
+        url: "http://localhost:4000/users/login",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+          localStorage.setItem("token", response.data);
+          const succeful = 1;
+          handleLogin(succeful);
+        })
+        .catch(function (error) {
+          console.log(error);
+          toast("Login unsucceful");
+        });
+    }
   };
 
   return (
-    <div className="Auth-form-container">
+    <div className="body">
       <form method="post" className="Auth-form" onSubmit={handleSubmit}>
         <div className="logo">
           <h1>Login</h1>
@@ -75,7 +72,7 @@ progress: undefined,
         <div>
           <input
             type="text"
-            className="form-control mt-1"
+            className="form-control mt-1 mb-3"
             onChange={handleInput}
             value={userLogin.email}
             name="email"
@@ -87,7 +84,7 @@ progress: undefined,
         <div>
           <input
             type="password"
-            className="form-control mt-1"
+            className="form-control mt-1 mb-3"
             onChange={handleInput}
             value={userLogin.password}
             name="password"
@@ -96,8 +93,8 @@ progress: undefined,
             autoComplete="on"
           ></input>
         </div>
-        <div>
-          <Button className="wd-100" onClick={PostData}>
+        <div className="text-center">
+          <Button className="wd-100 mt-3" onClick={PostData}>
             Login
           </Button>
         </div>
@@ -106,7 +103,6 @@ progress: undefined,
         <p className="create">
           Don't have an account ?<Link to="/register"> Register</Link>
         </p>
-        <ToastContainer/>
       </div>
     </div>
   );

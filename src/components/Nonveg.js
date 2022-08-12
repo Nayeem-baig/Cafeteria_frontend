@@ -55,7 +55,7 @@ const Nonveg = () => {
   function handleFav(x) {
     var axios = require("axios");
     var data = JSON.stringify({
-      id: x._id,
+      id: x.productID,
     });
 
     var config = {
@@ -122,7 +122,7 @@ const Nonveg = () => {
   function handleFav(x) {
     var axios = require("axios");
     var data = JSON.stringify({
-      id: x._id,
+      id: x.productID,
     });
    
 
@@ -221,11 +221,11 @@ const Nonveg = () => {
                         {product.description}
                       </Card.Text>
                       <div>
-                        {cartData.filter((d) => d._id == product._id).length ===
+                        {cartData.filter((d) => d.productID == product.productID).length ===
                         1 ? (
                           <div className="btns">
                             <Button
-                              onClick={() => removeCart(product._id)}
+                              onClick={() => removeCart(product.productID)}
                               variant="light"
                               className="w-100 buttons"
                             >
@@ -241,10 +241,10 @@ const Nonveg = () => {
                             Add to cart
                           </Button>
                         )}
-                        {favourites.filter((d) => d._id === product._id)
+                        {favourites.filter((d) => d.productID === product.productID)
                           .length === 1 ? (
                           <Button
-                            onClick={() => removeFav(product._id)}
+                            onClick={() => removeFav(product.productID)}
                             variant="light"
                             className="w-100 buttons"
                           >

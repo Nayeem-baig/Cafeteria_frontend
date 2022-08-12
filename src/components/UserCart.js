@@ -40,13 +40,13 @@ const UserCart = () => {
     // dispatch({ type: "ADDED" , payload:product });
     console.log(product);
   };
-  const increase = (productId) => {
-    dispatch({ type: "ADD", payload: productId });
-    dispatch({ type: "ADDED", payload: productId });
+  const increase = (productID) => {
+    dispatch({ type: "ADD", payload: productID });
+    dispatch({ type: "ADDED", payload: productID });
   };
-  const decrease = (productId) => {
-    dispatch({ type: "SUB", payload: productId });
-    dispatch({ type: "ADDED", payload: productId });
+  const decrease = (productID) => {
+    dispatch({ type: "SUB", payload: productID });
+    dispatch({ type: "ADDED", payload: productID });
   };
   return (
     <div className="p-0 m-0">
@@ -95,7 +95,7 @@ const UserCart = () => {
                     <div className="buttons">
                     <div className="btns">
                       <Button
-                        onClick={() => increase(product._id)}
+                        onClick={() => increase(product.productID)}
                         variant="light"
                         className="incdec"
                       >
@@ -103,14 +103,14 @@ const UserCart = () => {
                       </Button>
                       <div> {product.cartQuantity}</div>
                       {product.cartQuantity-1 ? <Button
-                        onClick={() => decrease(product._id)}
+                        onClick={() => decrease(product.productID)}
                         variant="light"
                         className="incdec"
                       >
                         -
                       </Button>:
                       <Button
-                      onClick={() => handlecart(product._id)}
+                      onClick={() => handlecart(product.productID)}
                       variant="light"
                       className=""
                     >
@@ -119,7 +119,7 @@ const UserCart = () => {
                       }
                     </div>
                     <Button
-                      onClick={() => handlecart(product._id)}
+                      onClick={() => handlecart(product.productID)}
                       variant="danger"
                       className="w-100"
                     >
