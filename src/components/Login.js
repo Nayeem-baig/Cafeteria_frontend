@@ -22,7 +22,7 @@ const Login = () => {
   };
   const handleLogin = (issuceful) => {
     if (issuceful) {
-      navigate("/product");
+      navigate("/allcategory");
     }
   };
   const PostData = async (event) => {

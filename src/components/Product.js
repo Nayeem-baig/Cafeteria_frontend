@@ -15,20 +15,10 @@ import { Nav } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import CartReduser from "../redux/reducers/CartReduser";
 import { Row, Col } from "reactstrap";
-import Veg from "./veg";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ToggleButton from "react-bootstrap/ToggleButton";
-import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+
 
 const Product = () => {
   const token = localStorage.getItem("token");
-  const [checked, setChecked] = useState(false);
-  const [radioValue, setRadioValue] = useState("1");
-
-  const radios = [
-    { name: "Active", value: "1" },
-    { name: "Radio", value: "2" },
-  ];
   const notify = (noti) =>
     toast.info(noti, {
       position: "top-right",

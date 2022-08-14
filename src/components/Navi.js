@@ -6,10 +6,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import styles from "./Navi.css";
-
-
-
 import React from 'react'
+
 
 const Navi = () => {
   return (
@@ -24,9 +22,9 @@ const Navi = () => {
           style={{  }}
            navbarScroll
          >
-           <NavLink className='navItems' to={'/product'} >Home</NavLink>
+           <NavLink className='navItems' to={'/allcategory'} >Home</NavLink>
            <NavLink className='navItems' to={'/users/display_favourites'}>Favourites</NavLink>
-           <NavLink className='navItems' to={'/product/veg'}>Veg</NavLink>
+           {/* <NavLink className='navItems' to={'/product/veg'}>Veg</NavLink> */}
            {/* <NavLink className='navItems' to={'/product/nonveg'}>Non veg</NavLink> */}
            <NavLink className='navItems' to={'/user/checkout'}>Cart</NavLink>
            <NavLink className='navItems' to={'/profile'}>Account</NavLink>

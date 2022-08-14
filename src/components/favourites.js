@@ -138,7 +138,7 @@ const Favourites = () => {
                       <Card.Text className="text">
                         {product.description}
                       </Card.Text>
-                      {console.log("produuuuuuuuuuuuuuuuuuuuuuuuuuuuuuct",product)}
+                      {/* {console.log("produuuuuuuuuuuuuuuuuuuuuuuuuuuuuuct",product)} */}
                       <div>
                         {cartData.filter((d) => d.productID == product._id).length ===
                         

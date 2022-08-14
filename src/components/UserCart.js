@@ -24,10 +24,6 @@ const UserCart = () => {
       return "";
     };
     window.addEventListener("beforeunload", unloadCallback);
-    if (cartData.length === 0) {
-      alert("Your cart is empty! Add items to view");
-      navigate("/product");
-    }
     setTimeout(() => {
       dispatch({type:'CLEAR_UPDATES'})
     }, 1000);

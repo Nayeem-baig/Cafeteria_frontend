@@ -3,8 +3,10 @@ import { useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import styles from "./Product.css";
 import { toast } from "react-toastify";
+import { Navigate, useNavigate } from "react-router-dom";
 const Checkout_btn = () => {
   let amount = 0;
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const cartData = useSelector((state) => state?.CartReduser);
   console.log(cartData)

@@ -41,6 +41,7 @@ const AddItem = () => {
     name: "",
     description: "",
     price: "",
+    img:""
   });
   const handleInput = (event) => {
     const name = event.target.name;
@@ -54,7 +55,7 @@ const AddItem = () => {
   };
   const PostData = async (event) => {
     event.preventDefault();
-    const { name, description, price, veg,category, recommended } = addItem;
+    const { name, description, price, veg,category, recommended , img} = addItem;
     var data = JSON.stringify({
       name: name,
       description: description,
@@ -62,6 +63,7 @@ const AddItem = () => {
       veg: selects,
       category: selectCat,
       recommended:selectRec,
+      img:img,
     });
     console.log(data);
 
@@ -79,9 +81,12 @@ const AddItem = () => {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
+        alert(response.data);
+        window.location.reload(false);
       })
       .catch(function (error) {
         console.log(error);
+        alert(error);
       });
 
   };
@@ -146,6 +151,17 @@ const AddItem = () => {
             <option value="0"> No</option>
             <option value="1"> Yes</option>
           </select>
+        </div>
+        <div>
+          <input
+            type="text"
+            onChange={handleInput}
+            value={addItem.img}
+            name="img"
+            id="img"
+            placeholder="Image link"
+            autoComplete="off"
+          ></input>
         </div>
         <Button className="button" onClick={PostData}>
           Add Item
