@@ -1,17 +1,13 @@
-import React from 'react'
-import Navi from './Navi'
+import React from "react";
+import Navi from "./Navi";
 
 const Orderhistory = () => {
   return (
-
     <div>
-      <Navi/>
-<div className='titles margin-top-10 mb-2'>
+      <Navi />
+      <div className="titles margin-top-10 mb-2">Orderhistory</div>
+    </div>
+  );
+};
 
-        Orderhistory
-</div>
-        </div>
-  )
-}
-
-export default Orderhistory
+export default Orderhistory;
