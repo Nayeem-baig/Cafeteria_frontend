@@ -145,10 +145,50 @@ const CategorySelected = () => {
                   console.log(error);
                 });
         }
+    else if (selectCat === "salads"){
+            var config = {
+                method: "get",
+                url: "http://localhost:4000/product/salads",
+                headers: {
+                  Authorization: "Bearer " + token,
+                },
+              };
+          
+              axios(config)
+                .then(function (response) {
+                  item = response.data;
+                  setProduct(item);
+                  console.log("loaddeed", item);
+                  return;
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+        }
     else if (selectCat === "pasta"){
             var config = {
                 method: "get",
                 url: "http://localhost:4000/product/pasta",
+                headers: {
+                  Authorization: "Bearer " + token,
+                },
+              };
+          
+              axios(config)
+                .then(function (response) {
+                  item = response.data;
+                  setProduct(item);
+                  console.log("loaddeed", item);
+                  return;
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+        }
+    else if (selectCat === "all product"){
+            var config = {
+                method: "get",
+                url: "http://localhost:4000/product/all",
                 headers: {
                   Authorization: "Bearer " + token,
                 },
@@ -307,10 +347,10 @@ const CategorySelected = () => {
         }
     }
 
-  function handleFav(x) {
+  function handleFav(product) {
     var axios = require("axios");
     var data = JSON.stringify({
-      id: x._id,
+      id: product._id,
     });
    
 
@@ -328,8 +368,7 @@ const CategorySelected = () => {
       .then(function (response) {
         console.log(response);
       dispatch({ type: "ADDED", payload: response.data });
-
-        notify(x.name + " Added to favourites");
+        notify(product.name + " added to favourites");
       })
       .catch(function (error) {
         if ((error = 409)) {
@@ -337,10 +376,10 @@ const CategorySelected = () => {
         } else console.log(error);
       });
   }
-  function removeFav(x){
+  function removeFav(product){
     var axios = require('axios');
     var data = JSON.stringify({
-      "id": x
+      "id": product._id
     });
     
     var config = {
@@ -356,6 +395,7 @@ const CategorySelected = () => {
     axios(config)
     .then(function (response) {
       dispatch({ type: "REMOVE", payload: response.data });
+      toast.warn(product.name + " removed to favourites")
       // console.log(JSON.stringify(response.data));
     })
     .catch(function (error) {
@@ -364,11 +404,12 @@ const CategorySelected = () => {
     
   }
   const removeCart = (product) => {
-    dispatch({type: "REMOVE_PRODUCT_FROM_CART", payload : product})
+    dispatch({type: "REMOVE_PRODUCT_FROM_CART", payload : product._id})
+    toast.warn(product.name + " removed from cart")
   }
-  const handlecart = (x) => {
-    console.log(x);
-    dispatch({ type: "ADD_PRODUCT_TO_CART", payload: x });
+  const handlecart = (product) => {
+    dispatch({ type: "ADD_PRODUCT_TO_CART", payload: product });
+    toast(product.name +" added to cart")
   };
   function RenderFunc() {
   return (
@@ -376,7 +417,7 @@ const CategorySelected = () => {
           <div>
 <Navi/>
     </div>
-    <div className="titles">
+    <div className="titles margin-top-10">
       {selectedCategory}
     </div>
       <Row>
@@ -405,7 +446,7 @@ const CategorySelected = () => {
                         1 ? (
                           <div className="btns">
                             <Button
-                              onClick={() => removeCart(product._id)}
+                              onClick={() => removeCart(product)}
                               variant="light"
                               className="w-100 buttons"
                             >
@@ -424,7 +465,7 @@ const CategorySelected = () => {
                         {favourites.filter((d) => d._id === product._id)
                           .length === 1 ? (
                           <Button
-                            onClick={() => removeFav(product._id)}
+                            onClick={() => removeFav(product)}
                             variant="light"
                             className="w-100 buttons"
                           >

@@ -7,12 +7,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import styles from "./Navi.css";
 import React from 'react'
+import { FaHeart } from "react-icons/fa";
+import { BsFillCartCheckFill , BsFillBookmarkHeartFill , BsHouseFill , BsFillPersonFill } from "react-icons/bs";
+
 
 
 const Navi = () => {
   return (
-    <div className="Navigation">
-        <Navbar className="container sticky " bg="light" expand="lg" fixed="top">
+    <div className="">
+        <Navbar className="bg-light"  expand="lg" fixed="top">
       <Container fluid>
         <Navbar.Brand > <p className="title">Cafeteria❞</p> </Navbar.Brand>
        <Navbar.Toggle  aria-controls="navbarScroll" />
@@ -22,12 +25,12 @@ const Navi = () => {
           style={{  }}
            navbarScroll
          >
-           <NavLink className='navItems' to={'/allcategory'} >Home</NavLink>
-           <NavLink className='navItems' to={'/users/display_favourites'}>Favourites</NavLink>
+           <NavLink className='navItems' to={'/allcategory'} > <div><BsHouseFill/></div> Home </NavLink>
+           <NavLink className='navItems' to={'/users/display_favourites'}><div><BsFillBookmarkHeartFill /></div>Favourites</NavLink>
            {/* <NavLink className='navItems' to={'/product/veg'}>Veg</NavLink> */}
            {/* <NavLink className='navItems' to={'/product/nonveg'}>Non veg</NavLink> */}
-           <NavLink className='navItems' to={'/user/checkout'}>Cart</NavLink>
-           <NavLink className='navItems' to={'/profile'}>Account</NavLink>
+           <NavLink className='navItems' to={'/user/checkout'}> <div><BsFillCartCheckFill/></div>Cart</NavLink>
+           <NavLink className='navItems' to={'/profile'}> <div><BsFillPersonFill/></div>Account</NavLink>
           </Nav>
         </Navbar.Collapse> 
       </Container> 

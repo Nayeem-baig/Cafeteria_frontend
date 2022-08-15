@@ -12,6 +12,7 @@ const CartReduser = (state = [], action) => {
       const tempProduct = { 
         productID: data._id,
         name: data.name,
+        img: data.img,
         description: data.description,
         price:data.price,
         category:data.category,

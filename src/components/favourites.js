@@ -57,7 +57,7 @@ const Favourites = () => {
       .then(function (response) {
         userFavs = response.data;
         setFavourites(userFavs);
-        console.log("userFavs",userFavs)
+        console.log("userFavs", userFavs);
       })
       .catch(function (error) {
         console.log(error);
@@ -92,90 +92,107 @@ const Favourites = () => {
   };
   const handlecart = (product) => {
     dispatch({ type: "ADD_PRODUCT_TO_CART", payload: product });
+    toast(product.name + " added to cart")
   };
   const removeCart = (product) => {
-    dispatch({type: "REMOVE_PRODUCT_FROM_CART", payload : product})
-  }
+    dispatch({ type: "REMOVE_PRODUCT_FROM_CART", payload: product._id });
+    toast.warn(product.name + " removed from cart")
+  };
   console.log(favourites);
   function RenderFunc() {
     return (
       <div>
-        <div>
-        <Navi/>
-        </div>
-       <div className="titles">Favourites</div> 
-       <Row>
-          {favourites.length > 0 &&
-            favourites.map((product) => (
-              <Col lg="3">
-                <div>
-                  <Card
-                    className="wd-100 flexRow"
-                    style={{ minWidth: "300px" }}
-                  >
-                    <Card.Body>
-                      <Card.Img
-                        className="card-img-top"
-                        variant="top"
-                        src={product.img}
-                      />
-                      <Card.Text className="text">{product.name}</Card.Text>
-                      <Card.Text className="text">{`₹${product.price}`}</Card.Text>
-                      <Card.Text className="text">
-                        {product.veg ? (
-                          <img
-                            className="card-img-icon"
+        {favourites.length === 0 ? (
+          <div >
+          <Navi />
+          <div className="titles margin-top-8">Favourites</div>
+          <img src={require("../assets/emptyfav.jpg")} className="wd-100" />
+          <div className="titles"> Oops you've not added any item as favourites </div>
+          <Button
+            onClick={() => navigate("/allcategory")}
+            variant="danger"
+            className="w-100 mt-3"
+          >
+            Browse
+          </Button>
+        </div> 
+        ) : (
+          <div>
+            <Navi />
+            <div className="titles margin-top-10 mb-2">Favourites</div>
+            <Row>
+              {favourites.length > 0 &&
+                favourites.map((product) => (
+                  <Col lg="3">
+                    <div>
+                      <Card
+                        className="wd-100 flexRow"
+                        style={{ minWidth: "300px" }}
+                      >
+                        <Card.Body>
+                          <Card.Img
+                            className="card-img-top"
                             variant="top"
-                            src={require("../assets/veg.jpg")}
+                            src={product.img}
                           />
-                        ) : (
-                          <img
-                            src={require("../assets/nonveg.jpg")}
-                            className="card-img-icon"
-                          />
-                        )}
-                      </Card.Text>
-                      <Card.Text className="text">
-                        {product.description}
-                      </Card.Text>
-                      {/* {console.log("produuuuuuuuuuuuuuuuuuuuuuuuuuuuuuct",product)} */}
-                      <div>
-                        {cartData.filter((d) => d.productID == product._id).length ===
-                        
-                        1 ? (
-                          <div className="btns">
+                          <Card.Text className="text">{product.name}</Card.Text>
+                          <Card.Text className="text">{`₹${product.price}`}</Card.Text>
+                          <Card.Text className="text">
+                            {product.veg ? (
+                              <img
+                                className="card-img-icon"
+                                variant="top"
+                                src={require("../assets/veg.jpg")}
+                              />
+                            ) : (
+                              <img
+                                src={require("../assets/nonveg.jpg")}
+                                className="card-img-icon"
+                              />
+                            )}
+                          </Card.Text>
+                          <Card.Text className="text">
+                            {product.description}
+                          </Card.Text>
+                          {/* {console.log("produuuuuuuuuuuuuuuuuuuuuuuuuuuuuuct",product)} */}
+                          <div>
+                            {cartData.filter((d) => d.productID == product._id)
+                              .length === 1 ? (
+                              <div className="btns">
+                                <Button
+                                  onClick={() => removeCart(product)}
+                                  variant="light"
+                                  className="w-100 buttons"
+                                >
+                                  Remove from cart
+                                </Button>
+                              </div>
+                            ) : (
+                              <Button
+                                onClick={() => handlecart(product)}
+                                variant="danger"
+                                className="w-100 buttons"
+                              >
+                                Add to cart
+                              </Button>
+                            )}
                             <Button
-                              onClick={() => removeCart(product._id)}
+                              onClick={() => removeFav(product)}
                               variant="light"
                               className="w-100 buttons"
                             >
-                              Remove from cart
+                              Remove from Favourites
                             </Button>
                           </div>
-                        ) : (
-                          <Button
-                            onClick={() => handlecart(product)}
-                            variant="danger"
-                            className="w-100 buttons"
-                          >
-                            Add to cart
-                          </Button>
-                        )}
-                          <Button
-                            onClick={() => removeFav(product)}
-                            variant="light"
-                            className="w-100 buttons"
-                          >
-                            Remove from Favourites
-                          </Button>
-                      </div>
-                    </Card.Body>
-                  </Card>
-                </div>
-              </Col>
-            ))}
-        </Row>
-        <ToastContainer />
+                        </Card.Body>
+                      </Card>
+                    </div>
+                  </Col>
+                ))}
+            </Row>
+            <ToastContainer />
+          </div>
+        )}
       </div>
     );
   }

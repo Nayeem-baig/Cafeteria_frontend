@@ -11,9 +11,9 @@ import Nonveg from "./components/Nonveg";
 import UserCart from "./components/UserCart";
 import Navi from "./components/Navi";
 import Dummy from "./components/dummyproduct";
-import Juice from "./components/Juice";
 import Allcategory from "./components/Allcategory";
 import CategorySelected from "./components/CategorySelected";
+import Orderhistory from "./components/Orderhistory";
 
 function App() {
   return (
@@ -31,9 +31,9 @@ function App() {
         <Route path="/users/display_favourites" element={<Favourites />} />
         <Route path="/addItems" element={<AddItem />} />
         <Route path="/product/veg" element={<Veg />} />
-        <Route path="/product/juice" element={<Juice />} />
         <Route path="/product/nonveg" element={<Nonveg />} />
         <Route path="/user/checkout" element={<UserCart />} />
+        <Route path="/orderhistory" element={<Orderhistory />} />
       </Routes>
     </BrowserRouter>
     </div>

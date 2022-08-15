@@ -206,7 +206,7 @@ const Nonveg = () => {
                       <Card.Img
                         className="card-img-top"
                         variant="top"
-                        src={require("../assets/burger.jpg")}
+                        src={product.img}
                       />
                       <Card.Text className="text">{product.name}</Card.Text>
                       <Card.Text className="text">{`₹${product.price}`}</Card.Text>

@@ -7,21 +7,26 @@
     text-decoration: none;
 }
 .navItems {
-  background: linear-gradient(#1095c1 0 0) var(--p, 0) / var(--p, 0) no-repeat;
+  display: flex;
+  background: linear-gradient(#b12486 0 0) var(--p, 0) / var(--p, 0) no-repeat;
   /* border-radius: 20%; */
   /* padding: 2px; */
-  transition: 0.4s;
+  transition: 0.8s;
   margin: 0px 50px 0px 50px;
+  color: #d54d7b;
+  font-family: "Great Vibes", cursive;
+  font-size: 18px;
+  font-weight: normal;
+  text-align: center;
+  text-shadow: 0 1px 1px #fff;
 }
-.categorybox:hover{
-  opacity: 0.8;
-  text-decoration: underline;
+.catBox:hover{
+  text-decoration: underline #1095c1;
 }
+
 .navItems:hover {
   --p: 100%;
   color: #fff;
-  text-decoration: none;
-  text-rendering: optimizeSpeed;
 }
 .title {
   color: #d54d7b;

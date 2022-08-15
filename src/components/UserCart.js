@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import Checkout from "./Checkout_btn";
 import styles from "./Product.css";
 import Navbar from "react-bootstrap/Navbar";
-import { Col ,Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Navi from "./Navi";
 
@@ -16,7 +16,7 @@ const UserCart = () => {
   const dispatch = useDispatch();
   const updates = useSelector((state) => state?.UpdatesReduser);
   const cartData = useSelector((state) => state?.CartReduser);
-
+console.log("hegjegehe", cartData)
   useEffect(() => {
     const unloadCallback = (event) => {
       event.preventDefault();
@@ -25,7 +25,7 @@ const UserCart = () => {
     };
     window.addEventListener("beforeunload", unloadCallback);
     setTimeout(() => {
-      dispatch({type:'CLEAR_UPDATES'})
+      dispatch({ type: "CLEAR_UPDATES" });
     }, 1000);
     return () => window.removeEventListener("beforeunload", unloadCallback);
   }, [cartData, updates]);
@@ -44,95 +44,138 @@ const UserCart = () => {
     dispatch({ type: "SUB", payload: productID });
     dispatch({ type: "ADDED", payload: productID });
   };
+console.log("size" + (cartData.length === 0) )
   return (
-    <div className="p-0 m-0">
-      <div>
-        <Navi />
-       <div className="titles">
-       Cart
-        </div> 
-        <Row>
-        {cartData.length > 0 &&
-          cartData.map((product) => (
-            <Col lg="12">
-            <div className="m-0 p-0 ">
-              <Card className="bgcard w-100 p-0 m-0">
-                <Card.Body className="d-flex align-items-center w-100 p-0 m-0">
-                  <Row className="w-100">
-                  <Col lg="2" className="text">
-                    <Card.Img
-                      className="card-img-top card-img-cart"
-                      variant="top"
-                      src={require("../assets/burger.jpg")}
-                    />
-                  </Col>
-
-                  <Col lg="3" className=" d-flex justify-content-center align-items-center">
-                    <Card.Text>{product.name}</Card.Text>
-                  </Col>
-                  <Col lg="1" className=" d-flex justify-content-center align-items-center">
-                    <Card.Text>{`₹${product.price}`}</Card.Text>
-                  </Col>
-                  <Col lg="1" className=" d-flex justify-content-center align-items-center">
-                  {product.veg ?    
-                        <img
-                        className="card-img-icon"
-                        variant="top"
-                        src={require("../assets/veg.jpg")}
-                      /> :    <img
-                      src={require("../assets/nonveg.jpg")}
-                      className="card-img-icon"
-                    />}
-                  </Col>
-                  <Col lg="2" className="itemCont d-flex justify-content-center align-items-center">
-                  <Card.Text className="text">{product.description}</Card.Text>
-                  </Col>
-                  <Col lg="2" className="itemCont d-flex justify-content-center align-items-center">
-                    <div className="buttons">
-                    <div className="btns">
-                      <Button
-                        onClick={() => increase(product.productID)}
-                        variant="light"
-                        className="incdec"
-                      >
-                        +
-                      </Button>
-                      <div> {product.cartQuantity}</div>
-                      {product.cartQuantity-1 ? <Button
-                        onClick={() => decrease(product.productID)}
-                        variant="light"
-                        className="incdec"
-                      >
-                        -
-                      </Button>:
-                      <Button
-                      onClick={() => handlecart(product.productID)}
-                      variant="light"
-                      className=""
-                    >
-                      -
-                    </Button>
-                      }
-                    </div>
-                    <Button
-                      onClick={() => handlecart(product.productID)}
-                      variant="danger"
-                      className="w-100"
-                    >
-                      Remove{" "}
-                    </Button>
-                    </div>
-                  </Col>
-                  </Row>
-                 
-                </Card.Body>
-              </Card>
-            </div>
-            </Col>
-          ))}
-      </Row>
+    <div>
+      {cartData.length === 0 ? (
+       
+        <div>
+          <Navi />
+          <img src={require("../assets/emptyCart.jpg")} className="wd-100" />
+          <Button
+            onClick={() => navigate("/allcategory")}
+            variant="danger"
+            className="w-100 mt-3"
+          >
+            Browse
+          </Button>
+        </div>
+      ) : (
+        <div className="p-0 m-0">
+        <div>
+          <Navi />
+          <div className="titles margin-top-10 mb-2">Cart</div>
+          <Row>
+            {cartData.length > 0 &&
+              cartData.map((product) => (
+                <Col lg="12">
+                  <div className="m-0 p-0 ">
+                    <Card className="bgcard w-100 p-0 m-0">
+                      <Card.Body className="d-flex align-items-center w-100 p-0 m-0">
+                        <Row className="w-100">
+                          <Col lg="2" className="text">
+                            <Card.Img
+                              className="card-img-top card-img-cart"
+                              variant="top"
+                              src={product.img}
+                            />
+                          </Col>
+                          <Col
+                            lg="3"
+                            className=" d-flex justify-content-center align-items-center"
+                          >
+                            <Card.Text>{product.name}</Card.Text>
+                          </Col>
+                          <Col
+                            lg="1"
+                            className=" d-flex justify-content-center align-items-center"
+                          >
+                            <Card.Text>{`₹${product.price}`}</Card.Text>
+                          </Col>
+                          <Col
+                            lg="1"
+                            className=" d-flex justify-content-center align-items-center"
+                            >
+                            {product.veg ? (
+                              <img
+                              className="card-img-icon"
+                              variant="top"
+                              src={require("../assets/veg.jpg")}
+                              />
+                              ) : (
+                                <img
+                                src={require("../assets/nonveg.jpg")}
+                                className="card-img-icon"
+                                />
+                            )}
+                          </Col>
+                          <Col
+                            lg="2"
+                            className="itemCont d-flex justify-content-center align-items-center"
+                          >
+                            <Card.Text className="text">
+                              {product.description}
+                            </Card.Text>
+                          </Col>
+                          <Col
+                            lg="2"
+                            className="itemCont d-flex justify-content-center align-items-center"
+                          >
+                            <div className="buttons">
+                              <div className="btns">
+                                <Button
+                                  onClick={() => increase(product.productID)}
+                                  variant="light"
+                                  className="incdec"
+                                >
+                                  +
+                                </Button>
+                                <div className="mr-3 ml-3">
+                                  {" "}
+                                  {product.cartQuantity}
+                                </div>
+                                {product.cartQuantity - 1 ? (
+                                  <Button
+                                    onClick={() =>
+                                      decrease(product.productID)
+                                    }
+                                    variant="light"
+                                    className="incdec"
+                                  >
+                                    -
+                                  </Button>
+                                ) : (
+                                  <Button
+                                    onClick={() =>
+                                      handlecart(product.productID)
+                                    }
+                                    variant="light"
+                                    className=""
+                                  >
+                                    -
+                                  </Button>
+                                )}
+                              </div>
+                              <Button
+                                onClick={() => handlecart(product.productID)}
+                                variant="danger"
+                                className="w-100 mt-3"
+                              >
+                                Remove{" "}
+                              </Button>
+                            </div>
+                          </Col>
+                        </Row>
+                      </Card.Body>
+                    </Card>
+                  </div>
+                </Col>
+              ))}
+          </Row>
+        </div>
+        <Checkout />
       </div>
-      <Checkout />
+      )}
     </div>
   );
 };
