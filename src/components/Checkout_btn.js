@@ -6,17 +6,21 @@ import { toast } from "react-toastify";
 import { Navigate, useNavigate } from "react-router-dom";
 import { BsWallet2, BsFillBagCheckFill } from "react-icons/bs";
 import { TbReceiptTax } from "react-icons/tb";
+import { useDispatch } from "react-redux";
 
 const Checkout_btn = () => {
   let amount = 0;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const cartData = useSelector((state) => state?.CartReduser);
-  console.log(cartData);
+  const totalAmount = useSelector((state) => state?.TotalReduser);
+  console.log(totalAmount)
   const amt = () => {
     for (let i = 0; i < cartData.length; i++) {
       amount = amount + cartData[i].price * cartData[i].cartQuantity;
     }
+    // dispatch({ type: "TOTAL", payload: amount });
     return amount;
   };
   amount = 0;
@@ -46,10 +50,8 @@ const Checkout_btn = () => {
       .catch(function (error) {
         console.log(error);
       });
-
-    const totalAmount = amount + amount * 0.09 - amount * 0.05;
-    console.log("totalAmount", totalAmount);
-  }
+    }
+   
   return (
     <div>
       <div className="titlesCart">
@@ -58,7 +60,7 @@ const Checkout_btn = () => {
           Discount : 5% - {Math.floor(amount * 0.05)}/-
         </p>
         <p className="titlesCart">
-        Taxes & Charges : 9%  + {Math.floor(amount * 0.09)}/-
+          Taxes & Charges : 9% + {Math.floor(amount * 0.09)}/-
         </p>
         <p className="titlesCart">
           Total Amount: ₹{Math.floor(amount + amount * 0.09 - amount * 0.05)}
@@ -79,6 +81,7 @@ const Checkout_btn = () => {
             className="m-10 justify-content-center align-items-center"
           >
             Pay {Math.floor(amount + amount * 0.09 - amount * 0.05)}/-
+
             <BsWallet2 />
           </Button>
         </div>

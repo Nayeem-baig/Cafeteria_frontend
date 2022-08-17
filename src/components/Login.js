@@ -25,15 +25,21 @@ const Login = () => {
       navigate("/allcategory");
     }
   };
+  function isValidEmail(email) {
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+  }
   const PostData = async (event) => {
     event.preventDefault();
     const { email, password } = userLogin;
     if (email === "") {
-      toast.error("Please enter email");
-    }else if(password === ""){
-      toast.error("Please enter password");
-    } 
-    else {
+      return toast.error("Please enter email");
+    } else if (!isValidEmail(email)) {
+      toast.error('Email is invalid');
+    } else if (password === "") {
+      return toast.error("Please enter password");
+    } else if (password.length < 6) {
+      return toast.error("Minimum length of password is 6 or above");
+    } else {
       var axios = require("axios");
       var data = JSON.stringify({
         email: email,
@@ -57,8 +63,8 @@ const Login = () => {
           handleLogin(succeful);
         })
         .catch(function (error) {
+          toast.error(error.response.data);
           console.log(error);
-          toast("Login unsucceful");
         });
     }
   };

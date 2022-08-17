@@ -29,7 +29,7 @@ const CartReduser = (state = [], action) => {
       state[objInde].cartQuantity = decrease(state[objInde].cartQuantity);
       return state;
     case "REMOVE_PRODUCT_FROM_CART":
-      return state.filter((e) => e?.productID !== action?.payload);
+      return state.filter((e) => e?.productID !== action?.payload); 
     default:
       return state;
   }
