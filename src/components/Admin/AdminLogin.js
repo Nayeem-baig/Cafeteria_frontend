@@ -2,11 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import styles from "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 import { BsEyeSlashFill, BsEyeFill } from "react-icons/bs";
-const Login = () => {
+
+const AdminLogin = () => {
   const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState("password");
   const [userLogin, setUserLogin] = useState({
@@ -22,7 +22,6 @@ const Login = () => {
   const handleSubmit = (event) => {
     const newRecord = { ...userLogin };
   };
-
   function isValidEmail(email) {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
   }
@@ -53,7 +52,7 @@ const Login = () => {
 
       var config = {
         method: "post",
-        url: "http://localhost:4000/users/login",
+        url: "http://localhost:4000/users/adminlogin",
         headers: {
           "Content-Type": "application/json",
         },
@@ -64,8 +63,8 @@ const Login = () => {
         .then(function (response) {
           console.log(JSON.stringify(response.data));
           localStorage.setItem("token", response.data);
-          navigate("/allcategory");
           toast("Login successful!");
+          navigate("/admindasboard");
         })
         .catch(function (error) {
           toast.error(error.response.data);
@@ -78,7 +77,7 @@ const Login = () => {
     <div className="loginbody">
       <form method="post" className="Auth-form bodyCon" onSubmit={handleSubmit}>
         <div className="logo">
-          <h1>Login</h1>
+          <h1>Admin Login</h1>
         </div>
         <div>
           <input
@@ -113,16 +112,13 @@ const Login = () => {
           </Button>
         </div>
       </form>
-      <div className="create d-flex flex-column justify-content-ceter">
-        <p className="create ">
-          Don't have an account ?<Link to="/register"> Register</Link>
-        </p>
-        <p className="create ">
-          <Link to="/adminlogin"> Admin login?</Link>
+      <div className="create">
+        <p className="create">
+          <Link to="/login"> User login</Link>
         </p>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default AdminLogin;

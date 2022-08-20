@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
-import styles from "./Profile.css";
-import Navi from "./Navi";
 import Navbar from "react-bootstrap/Navbar";
 import { Nav } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
@@ -17,7 +15,8 @@ import {
   MdAlternateEmail,
   MdOutlinePersonAddAlt1,
 } from "react-icons/md";
-const Profile = () => {
+import AdminNavi from "./AdminNavi";
+const AdminProfile = () => {
   const [profile, setProfile] = useState([]);
   const navigate = useNavigate();
   let userData;
@@ -59,7 +58,7 @@ const Profile = () => {
   function RenderFunc() {
     return (
       <div className="align-content-center justify-content-center d-flex">
-        <Navi />
+        <AdminNavi />
         <div className="d-flex margin-top-10">
           <Card
             style={{ width: "18rem" }}
@@ -68,7 +67,7 @@ const Profile = () => {
             <Card.Img
               className="profile-img"
               variant="top"
-              src={require("../assets/profileimg.png")}
+              src={require("../Admin/assets/profileimg.png")}
             />
             <div className="align-content-center justify-content-center">
               <Card.Body className="align-content-center justify-content-center">
@@ -96,9 +95,6 @@ const Profile = () => {
                   <BiPencil /> Change password
                 </Card.Text>
                 <div className="titlesCart">
-                  <Button className="mb-3" onClick={orderHistory}>
-                    <BiHistory /> Order history
-                  </Button>{" "}
                   <Button variant="primary" onClick={logout}>
                     <BsFillPersonXFill /> Logout
                   </Button>
@@ -113,4 +109,4 @@ const Profile = () => {
 
   return <RenderFunc />;
 };
-export default Profile;
+export default AdminProfile;

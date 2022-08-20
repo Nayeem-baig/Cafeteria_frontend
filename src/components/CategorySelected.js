@@ -109,7 +109,7 @@ const CategorySelected = () => {
     if ( selectCat === "burgers") {
         var config = {
             method: "get",
-            url: "http://localhost:4000/product/burger",
+            url: "http://localhost:4000/product/burgers",
             headers: {
               Authorization: "Bearer " + token,
             },
@@ -462,6 +462,7 @@ const CategorySelected = () => {
                             Add to cart
                           </Button>
                         )}
+          {console.log(favourites,"hadwefibrfiwb")}
                         {favourites.filter((d) => d._id === product._id)
                           .length === 1 ? (
                           <Button

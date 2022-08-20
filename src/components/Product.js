@@ -185,7 +185,7 @@ const Product = () => {
   };
   function RenderFunc() {
     return (
-      <div>
+      <div className="wd-100">
         {localStorage.getItem("token") !== null && <Navi />}
         <div className="titles">
           Products

@@ -18,3 +18,9 @@
 .margin-top-5{
     margin-top: 5%;
 }
+.change{
+    color: blue;
+}
+.change:hover{
+    cursor: pointer;
+}

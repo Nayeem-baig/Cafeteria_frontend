@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
+import { BsEyeSlashFill ,BsEyeFill } from "react-icons/bs";
 
 const Register = () => {
   const navigate = useNavigate();
+  const [passwordType, setPasswordType] = useState("password");
   const [userRegistration, setUserRegistration] = useState({
     name: "",
     username: "",
@@ -24,6 +26,13 @@ const Register = () => {
   const handleSubmit = (event) => {
     const newRecord = { ...userRegistration };
   };
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text");
+      return;
+    }
+    setPasswordType("password");
+  };
 
   const handleReg = (issuceful) => {
     if (issuceful) {
@@ -33,13 +42,14 @@ const Register = () => {
   function isValidEmail(email) {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
   }
- function isNameValid(name) {
+  function isNameValid(name) {
     return /^[A-Za-z]+$/.test(name);
   }
 
   const PostData = async (event) => {
     event.preventDefault();
-    const { name, username, email, password, phn } = userRegistration;
+    const { name, username, email, password, phn, confirmPassword } =
+      userRegistration;
     if (name === "") {
       return toast.error("Please enter name");
     }
@@ -60,6 +70,9 @@ const Register = () => {
     }
     if (password.length < 6) {
       return toast.error("Minimum length of password is 6 or above!");
+    }
+    if (confirmPassword !== password) {
+      return toast.error("Passwords do not match");
     }
     if (phn === "") {
       return toast.error("Please enter phn!");
@@ -96,8 +109,8 @@ const Register = () => {
   };
 
   return (
-    <div className="body">
-      <form method="post" className="Auth-form" onSubmit={handleSubmit}>
+    <div className="loginbody">
+      <form method="post" className="Auth-form bodyCon" onSubmit={handleSubmit}>
         <div className="logo">
           <h1>Register</h1>
         </div>
@@ -139,7 +152,19 @@ const Register = () => {
         </div>
         <div>
           <input
-            type="text"
+            type="number"
+            className="form-control mt-1 mb-3"
+            onChange={handleInput}
+            value={userRegistration.phn}
+            name="phn"
+            id="phn"
+            placeholder="Phone number"
+            autoComplete="on"
+          ></input>
+        </div>
+        <div>
+          <input
+            type={passwordType}
             className="form-control mt-1 mb-3"
             onChange={handleInput}
             value={userRegistration.password}
@@ -151,15 +176,18 @@ const Register = () => {
         </div>
         <div>
           <input
-            type="number"
+            type={passwordType}
             className="form-control mt-1 mb-3"
             onChange={handleInput}
-            value={userRegistration.phn}
-            name="phn"
-            id="phn"
-            placeholder="Phone number"
-            autoComplete="on"
+            value={userRegistration.confirmPassword}
+            name="confirmPassword"
+            id="confirmPassword"
+            placeholder="Confirm password"
+            autoComplete="off"
           ></input>
+        </div>
+        <div className="btn btn-outline-primary" onClick={togglePassword}>
+          {passwordType === "password" ? <BsEyeFill /> : <BsEyeSlashFill />}
         </div>
         <div className="text-center">
           <Button className="button" onClick={PostData}>

@@ -24,33 +24,6 @@ const Checkout_btn = () => {
     return amount;
   };
   amount = 0;
-
-  function checkout(cartData) {
-    var axios = require("axios");
-    var data = JSON.stringify({
-      order: cartData,
-    });
-
-    var config = {
-      method: "post",
-      url: "http://localhost:4000/orders",
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        toast(response.data);
-        navigate("/allcategory");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }
    
   return (
     <div>
@@ -88,6 +61,34 @@ const Checkout_btn = () => {
       </div>
     </div>
   );
+  
+  function checkout(cartData) {
+    var axios = require("axios");
+    var data = JSON.stringify({
+      order: cartData,
+      total : Math.floor(amount + amount * 0.09 - amount * 0.05)
+    });
+  
+    var config = {
+      method: "post",
+      url: "http://localhost:4000/orders",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+  
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        toast(response.data);
+        navigate("/allcategory");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
 };
 
 export default Checkout_btn;

@@ -4,6 +4,9 @@ import { Button } from "react-bootstrap";
 import styles from "../Register.css";
 
 import { useState } from "react";
+import AdminButtons from "./ActionButtons";
+import AdminNavi from "./AdminNavi";
+import { toast } from "react-toastify";
 
 const AddItem = () => {
   const [category, setCategory] = useState([]);
@@ -34,7 +37,7 @@ const AddItem = () => {
       });
   };
 
-  const [selects, setSelects] = useState(0);
+  const [selects, setSelects] = useState(1);
   const [selectCat, setSelectCat] = useState("pasta");
   const [selectRec, setSelectRec] = useState(0);
   const [addItem, setAddItem] = useState({
@@ -81,7 +84,7 @@ const AddItem = () => {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
-        alert(response.data);
+        toast("Product added")
         window.location.reload(false);
       })
       .catch(function (error) {
@@ -91,46 +94,50 @@ const AddItem = () => {
 
   };
   return (
-    <div className="container">
-      <form method="post" className="container" onSubmit={handleSubmit}>
+    <div className="loginbody">
+      <AdminNavi/>  
+      <form method="post" className="Auth-form bodyCon" onSubmit={handleSubmit}>
         <div className="logo">
           <h1>Add item</h1>
         </div>
         <div>
           <input
             type="text"
+            className="form-control mt-1 mb-3"
             value={addItem.name}
             onChange={handleInput}
             name="name"
             id="name"
-            placeholder="item name"
+            placeholder="Item name"
             autoComplete="off"
           ></input>
         </div>
         <div>
           <input
             type="text"
+            className="form-control mt-1 mb-3"
             onChange={handleInput}
             value={addItem.description}
             name="description"
             id="description"
-            placeholder="description"
+            placeholder="Description"
             autoComplete="off"
           ></input>
         </div>
         <div>
           <input
+            className="form-control mt-1 mb-3"
             type="number"
             onChange={handleInput}
             value={addItem.price}
             name="price"
             id="price"
-            placeholder="price"
+            placeholder="Price"
             autoComplete="off"
           ></input>
         </div>
         <div>
-          <label> Category </label>
+          <label> Category :</label>
           <select value={selectCat} onChange={(e) => setSelectCat(e.target.value)}>
             {category.length > 0 &&
               category.map((x) => <option>{x.name}</option>)}
@@ -138,15 +145,15 @@ const AddItem = () => {
         </div>
 
         <div>
-          <label> Veg non veg </label>
+          <label> Type : </label>
           <select value={selects} onChange={(e) => setSelects(e.target.value)}>
-            <option value="0"> Non Veg</option>
             <option value="1"> Veg</option>
+            <option value="0"> Non Veg</option>
           </select>
         </div>
 
         <div>
-          <label> Recommended </label>
+          <label> Recommended :</label>
         <select value={selectRec} onChange={(e) => setSelectRec(e.target.value)}>
             <option value="0"> No</option>
             <option value="1"> Yes</option>
@@ -155,6 +162,7 @@ const AddItem = () => {
         <div>
           <input
             type="text"
+            className="form-control mt-1 mb-3"
             onChange={handleInput}
             value={addItem.img}
             name="img"
@@ -163,7 +171,7 @@ const AddItem = () => {
             autoComplete="off"
           ></input>
         </div>
-        <Button className="button" onClick={PostData}>
+        <Button className="wd-100 mt-3" onClick={PostData}>
           Add Item
         </Button>
       </form>
