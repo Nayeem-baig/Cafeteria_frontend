@@ -11,17 +11,39 @@ import { Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Navi from "./Navi";
 import formatDistance from "date-fns/formatDistance";
+import { motion } from "framer-motion";
 
 const Orderhistory = () => {
   const [orders, setOrders] = useState("");
+  const [users, setUsers] = useState([]);
   const [totalamt, setTotal] = useState(0);
   useEffect(() => {
+    loadAllUsers();
     loadOrderHistory();
   }, []);
   const token = localStorage.getItem("token");
   const totalAmount = useSelector((state) => state?.CartReduser);
   console.log("first", totalAmount);
+  function loadAllUsers() {
+    var axios = require("axios");
 
+    var config = {
+      method: "get",
+      url: "http://localhost:4000/users/listAllUsers",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setUsers(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   function conDate(dateNo) {
     const dateStr = dateNo;
     const str = formatDistance(new Date(dateStr), new Date());
@@ -51,6 +73,12 @@ const Orderhistory = () => {
   }
 
   return (
+    <motion.div 
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    transition={{duration:0.5}}
+    exit={{opacity:0}}
+    >
     <div>
       <Navi />
       <div className="titles margin-top-10 mb-2">Orderhistory</div>
@@ -121,6 +149,7 @@ const Orderhistory = () => {
           </div>
         ))}
     </div>
+    </motion.div>
   );
 };
 

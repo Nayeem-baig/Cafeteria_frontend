@@ -7,16 +7,38 @@ import { Button } from "react-bootstrap";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import AdminButtons from "./ActionButtons";
 import formatDistance from "date-fns/formatDistance";
+import { motion } from "framer-motion";
 
 const AdminDasboard = () => {
+  const token = localStorage.getItem("token");
   const [orders, setOrders] = useState("");
+  const [users, setUsers] = useState([]);
   let username;
 
   useEffect(() => {
     loadorders();
+    loadAllUsers();
   }, []);
   const navigate = useNavigate();
+  function loadAllUsers() {
+    var axios = require("axios");
 
+    var config = {
+      method: "get",
+      url: "http://localhost:4000/users/listAllUsers",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        setUsers(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   function loadorders() {
     const token = localStorage.getItem("token");
     var axios = require("axios");
@@ -44,32 +66,17 @@ const AdminDasboard = () => {
     const str = formatDistance(new Date(dateStr), new Date());
     return <h3>{str} ago.</h3>;
   }
-  function getname(product) {
-    var axios = require("axios");
-    var data = JSON.stringify({
-      uid: product.orderedBy,
-    });
-
-    var config = {
-      method: "get",
-      url: "http://localhost:4000/users/getuser",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  
-  return username
+  function getuser(orderedBy) {
+    const orderedByName = users.filter((x) => x._id === orderedBy)
+    return orderedByName[0]?.name;
   }
   return (
+    <motion.div 
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    transition={{duration:0.5}}
+    exit={{opacity:0}}
+    >
     <div className="">
       <AdminNavi />
       {/* <AdminButtons/> */}
@@ -79,8 +86,8 @@ const AdminDasboard = () => {
         orders.map((product) => (
           <div>
             <div>{conDate(product.createdAt)}</div>
-            <div>{product.orderedBy}</div>
-            <div>Total order value :{product.total}/-</div>
+            <h5 style={{ textTransform: "uppercase"}}>Customer name: {product.orderedBy}</h5>
+            <h6>Total order value :{product.total}/-</h6>
             <Row>
               {product.items.length > 0 &&
                 product.items.map((product) => (
@@ -143,6 +150,7 @@ const AdminDasboard = () => {
           </div>
         ))}
     </div>
+    </motion.div>
   );
 };
 

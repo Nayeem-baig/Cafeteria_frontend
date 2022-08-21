@@ -9,12 +9,14 @@ import Navi from "./Navi";
 import { Col, Container, Navbar, Row } from "react-bootstrap";
 import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 const Allcategory = () => {
   useEffect(() => {
     loadCategory();
   }, []);
   const [category, setCategory] = useState([]);
+  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -47,24 +49,47 @@ const Allcategory = () => {
   };
 
   return (
+    <motion.div 
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    transition={{duration:0.5}}
+    exit={{opacity:0}}
+    >
     <div className="body">
-      <div className="Navigation">
-        {/* <Container fluid>
-          <p className="title mt-5">Cafeteria❞ </p>
-        </Container> */}
-        <Navi/>
+      <Navi/>
+      <p className="titles margin-top-10">All categories</p>
+      <div className="d-flex mb-3">
+        <Col lg="2">
+        <input
+          className="form-control"
+          style={{ minWidth: "300px" }}
+          type="text"
+          placeholder="Search..."
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        </Col>
       </div>
-      <div  className="margin-top-10">
       <Row>
         {category.length > 0 &&
-          category.map((product) => (
+          category.filter((product) => {
+            if (search == "") {
+              return product;
+            } else if (
+              product.name.toLowerCase().includes(search.toLowerCase())
+            ) {
+              return product;
+            }
+          }).map((product) => (
+            
             <Col lg="3">
               <div
-                style={{ marginBottom: "20px", margin: "20px" }}
-                className="catBox"
+                className="mb-3 ml-3 mr-3"
                 onClick={() => takeCategory(product.name)}
               >
-                <Card className="wd-100 flexRow" style={{ maxWidth: "275px" }}>
+              <Card
+                    className="wd-100 flexRow"
+                    style={{ minWidth: "300px" }}
+                  >
                   <Card.Body>
                     <Card.Img
                       className="card-img-top"
@@ -83,8 +108,8 @@ const Allcategory = () => {
             </Col>
           ))}
       </Row>
-      </div>
     </div>
+    </motion.div>
   );
 };
 

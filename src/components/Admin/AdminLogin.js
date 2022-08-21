@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 import { BsEyeSlashFill, BsEyeFill } from "react-icons/bs";
+import { motion } from "framer-motion";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -74,6 +75,12 @@ const AdminLogin = () => {
   };
 
   return (
+    <motion.div 
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    transition={{duration:0.5}}
+    exit={{opacity:0}}
+    >
     <div className="loginbody">
       <form method="post" className="Auth-form bodyCon" onSubmit={handleSubmit}>
         <div className="logo">
@@ -118,6 +125,7 @@ const AdminLogin = () => {
         </p>
       </div>
     </div>
+    </motion.div>
   );
 };
 

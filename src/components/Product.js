@@ -15,7 +15,7 @@ import { Nav } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import CartReduser from "../redux/reducers/CartReduser";
 import { Row, Col } from "reactstrap";
-
+import { motion } from "framer-motion";
 
 const Product = () => {
   const token = localStorage.getItem("token");
@@ -185,6 +185,12 @@ const Product = () => {
   };
   function RenderFunc() {
     return (
+      <motion.div 
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      transition={{duration:0.5}}
+      exit={{opacity:0}}
+      >
       <div className="wd-100">
         {localStorage.getItem("token") !== null && <Navi />}
         <div className="titles">
@@ -227,9 +233,8 @@ const Product = () => {
                       </Card.Text>
                       {/* {console.log("product",product)} */}
                       <div>
-                        {cartData.filter((d) => d.productID == product._id).length ===
-                        
-                        1 ? (
+                        {cartData.filter((d) => d.productID == product._id)
+                          .length === 1 ? (
                           <div className="btns">
                             <Button
                               onClick={() => removeCart(product._id)}
@@ -312,9 +317,8 @@ const Product = () => {
                       </Card.Text>
                       {/* {console.log("product",product)} */}
                       <div>
-                        {cartData.filter((d) => d.productID == product._id).length ===
-                        
-                        1 ? (
+                        {cartData.filter((d) => d.productID == product._id)
+                          .length === 1 ? (
                           <div className="btns">
                             <Button
                               onClick={() => removeCart(product._id)}
@@ -360,6 +364,7 @@ const Product = () => {
         </Row>
         <ToastContainer />
       </div>
+      </motion.div>
     );
   }
   return <RenderFunc />;

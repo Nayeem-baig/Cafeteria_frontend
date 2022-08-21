@@ -10,6 +10,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Navi from "./Navi";
+import { motion } from "framer-motion";
 
 const UserCart = () => {
   let navigate = useNavigate();
@@ -46,6 +47,12 @@ console.log("hegjegehe", cartData)
   };
 console.log("size" + (cartData.length === 0) )
   return (
+    <motion.div 
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    transition={{duration:0.5}}
+    exit={{opacity:0}}
+    >
     <div>
       {cartData.length === 0 ? (
        
@@ -177,6 +184,7 @@ console.log("size" + (cartData.length === 0) )
       </div>
       )}
     </div>
+    </motion.div>
   );
 };
 

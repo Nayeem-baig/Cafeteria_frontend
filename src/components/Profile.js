@@ -17,6 +17,8 @@ import {
   MdAlternateEmail,
   MdOutlinePersonAddAlt1,
 } from "react-icons/md";
+import { motion } from "framer-motion";
+
 const Profile = () => {
   const [profile, setProfile] = useState([]);
   const navigate = useNavigate();
@@ -58,6 +60,12 @@ const Profile = () => {
   }
   function RenderFunc() {
     return (
+      <motion.div 
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      transition={{duration:0.5}}
+      exit={{opacity:0}}
+      >
       <div className="align-content-center justify-content-center d-flex">
         <Navi />
         <div className="d-flex margin-top-10">
@@ -108,6 +116,7 @@ const Profile = () => {
           </Card>
         </div>
       </div>
+      </motion.div>
     );
   }
 

@@ -13,6 +13,7 @@ import { Col, Row } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Favourites = () => {
   const notify = (noti) =>
@@ -101,6 +102,12 @@ const Favourites = () => {
   console.log(favourites);
   function RenderFunc() {
     return (
+      <motion.div 
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      transition={{duration:0.5}}
+      exit={{opacity:0}}
+      >
       <div>
         {favourites.length === 0 ? (
           <div >
@@ -194,6 +201,7 @@ const Favourites = () => {
           </div>
         )}
       </div>
+      </motion.div>
     );
   }
   return <RenderFunc />;

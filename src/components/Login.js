@@ -6,6 +6,7 @@ import styles from "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 import { BsEyeSlashFill, BsEyeFill } from "react-icons/bs";
+import { motion } from "framer-motion";
 const Login = () => {
   const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState("password");
@@ -75,6 +76,12 @@ const Login = () => {
   };
 
   return (
+    <motion.div 
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    transition={{duration:0.5}}
+    exit={{opacity:0}}
+    >
     <div className="loginbody">
       <form method="post" className="Auth-form bodyCon" onSubmit={handleSubmit}>
         <div className="logo">
@@ -122,6 +129,7 @@ const Login = () => {
         </p>
       </div>
     </div>
+    </motion.div>
   );
 };
 

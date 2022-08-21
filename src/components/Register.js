@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
 import { BsEyeSlashFill ,BsEyeFill } from "react-icons/bs";
+import { motion } from "framer-motion";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -109,6 +110,12 @@ const Register = () => {
   };
 
   return (
+    <motion.div 
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    transition={{duration:0.5}}
+    exit={{opacity:0}}
+    >
     <div className="loginbody">
       <form method="post" className="Auth-form bodyCon" onSubmit={handleSubmit}>
         <div className="logo">
@@ -197,6 +204,7 @@ const Register = () => {
       </form>
       <Link to="/login">Already have an account Login</Link>
     </div>
+    </motion.div>
   );
 };
 

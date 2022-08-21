@@ -84,6 +84,7 @@ const Checkout_btn = () => {
         console.log(JSON.stringify(response.data));
         toast(response.data);
         navigate("/allcategory");
+        window.location.reload();
       })
       .catch(function (error) {
         console.log(error);

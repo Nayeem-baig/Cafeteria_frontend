@@ -7,6 +7,7 @@ import { useState } from "react";
 import AdminButtons from "./ActionButtons";
 import AdminNavi from "./AdminNavi";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 const AddCategory = () => {
 
@@ -63,6 +64,12 @@ const AddCategory = () => {
 
   };
   return (
+    <motion.div 
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    transition={{duration:0.5}}
+    exit={{opacity:0}}
+    >
     <div className="loginbody">
       <AdminNavi/>  
       <form method="post" className="Auth-form bodyCon" onSubmit={handleSubmit}>
@@ -98,6 +105,7 @@ const AddCategory = () => {
         </Button>
       </form>
     </div>
+    </motion.div>
   );
 };
 

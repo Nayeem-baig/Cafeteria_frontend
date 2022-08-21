@@ -23,7 +23,7 @@ const AdminNavi = () => {
         <Container fluid>
           <Navbar.Brand>
             {" "}
-            <p className="title">Cafeteria❞</p>{" "}
+            <p className="title">Admin Cafeteria❞</p>{" "}
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
@@ -39,9 +39,7 @@ const AdminNavi = () => {
                 <NavDropdown.Item>
                   <Link to={"/additems"}>Add items</Link>
                 </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <Link to={"/deleteitem"}>Delete item</Link>
-                </NavDropdown.Item>
+             
                 <NavDropdown.Item>
                   <Link to={"/addcategory"}>Add category</Link>
                 </NavDropdown.Item>
@@ -54,10 +52,6 @@ const AdminNavi = () => {
                 </NavDropdown.Item>
                 <NavDropdown.Item>
                   <Link to={"/listusers"}>List users</Link>
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item>
-                  <Link to={"/blockuser"}>Block/Unblock delete user </Link>
                 </NavDropdown.Item>
               </NavDropdown>
               <NavLink className="navItems" to={"/adminprofile"}>
