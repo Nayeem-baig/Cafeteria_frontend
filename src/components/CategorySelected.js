@@ -404,7 +404,7 @@ const CategorySelected = () => {
     <motion.div 
     initial={{opacity:0}}
     animate={{opacity:1}}
-    transition={{duration:0.5}}
+    transition={{duration:0.2}}
     exit={{opacity:0}}
     >
     <div >
@@ -435,22 +435,41 @@ const CategorySelected = () => {
             })
             .map((product) => (
               <Col lg="3">
-                <div>
+                <div className="procon">
                   <Card
-                    className="wd-100 flexRow"
-                    style={{ minWidth: "300px" }}
+                    className="wd-100 d-flex flexRow "
+                    style={{ minWidth: "300px" ,maxWidth:"300px" }}
                   >
-                    <Card.Body>
+                    <Card.Body >
+                      <div className="d-flex">
                       <Card.Img
                         className="card-img-top"
                         variant="top"
+                    style={{ minWidth: "100px" ,maxWidth:"100px" }}
                         src={product.img}
                       />
-                      <Card.Text className="text">{product.name}</Card.Text>
-                      <Card.Text className="text">{`₹${product.price}`}</Card.Text>
-                      <Card.Text className="text">
+                      <div>
+                      <Card.Text className="text bold p-1 m-0">{product.name}</Card.Text>
+                      <Card.Text className="text p-0 m-0">{`₹${product.price}`}/-</Card.Text>
+                      </div>
+                      </div>
+                      <Card.Text className="p-0 m-0 description" style={{ color:"#575653" , fontSize:"13px" , maxlines: "2"}}>
                         {product.description}
                       </Card.Text>
+                      <div className="text">
+                      {product.veg ? (
+                              <img
+                              className="card-img-icon"
+                              variant="top"
+                              src={require("../assets/veg.jpg")}
+                              />
+                              ) : (
+                                <img
+                                src={require("../assets/nonveg.jpg")}
+                                className="card-img-icon"
+                                />
+                            )}
+                      </div>
                       <div>
                         {cartData.filter((d) => d.productID == product._id)
                           .length === 1 ? (
@@ -472,7 +491,7 @@ const CategorySelected = () => {
                             Add to cart
                           </Button>
                         )}
-                        {favourites.filter((d) => d._id === product._id)
+                        {favourites.length > 0 && favourites.filter((d) => d._id === product._id)
                           .length === 1 ? (
                           <Button
                             onClick={() => removeFav(product)}

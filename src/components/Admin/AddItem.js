@@ -60,6 +60,18 @@ const AddItem = () => {
   const PostData = async (event) => {
     event.preventDefault();
     const { name, description, price, veg,category, recommended , img} = addItem;
+    if(name === ""){
+      return toast.warn("Name required!")
+    }
+     if(description === ""){
+      return toast.warn("Description required!")
+    }
+     if(price === ""){
+      return toast.warn("Price required!")
+    }
+     if(img === ""){
+      return toast.warn("Image link required!")
+    }
     var data = JSON.stringify({
       name: name,
       description: description,
@@ -85,12 +97,18 @@ const AddItem = () => {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
-        toast("Product added")
-        window.location.reload(false);
+        // window.location.reload(false);
+        setAddItem({
+          name: "",
+          description: "",
+          price: "",
+          img:""
+        });
+        toast.success(name +" added successsully")
       })
       .catch(function (error) {
         console.log(error);
-        alert(error);
+        toast.error(error);
       });
 
   };
@@ -98,7 +116,7 @@ const AddItem = () => {
     <motion.div 
     initial={{opacity:0}}
     animate={{opacity:1}}
-    transition={{duration:0.5}}
+    transition={{duration:0.2}}
     exit={{opacity:0}}
     >
     <div className="loginbody">

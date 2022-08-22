@@ -79,10 +79,10 @@ const Login = () => {
     <motion.div 
     initial={{opacity:0}}
     animate={{opacity:1}}
-    transition={{duration:0.5}}
+    transition={{duration:0.2}}
     exit={{opacity:0}}
     >
-    <div className="loginbody">
+    <div className="loginbody" style={{width: "100%"}}>
       <form method="post" className="Auth-form bodyCon" onSubmit={handleSubmit}>
         <div className="logo">
           <h1>Login</h1>
@@ -120,11 +120,11 @@ const Login = () => {
           </Button>
         </div>
       </form>
-      <div className="create d-flex flex-column justify-content-ceter">
+      <div className="create d-flex flex-column justify-content-center">
         <p className="create ">
           Don't have an account ?<Link to="/register"> Register</Link>
         </p>
-        <p className="create ">
+        <p className="create justify-content-center">
           <Link to="/adminlogin"> Admin login?</Link>
         </p>
       </div>

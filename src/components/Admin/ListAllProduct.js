@@ -120,7 +120,7 @@ const ListAllProduct = () => {
     <motion.div 
     initial={{opacity:0}}
     animate={{opacity:1}}
-    transition={{duration:0.5}}
+    transition={{duration:0.2}}
     exit={{opacity:0}}
     >
     <div className="body">
@@ -161,15 +161,23 @@ const ListAllProduct = () => {
                     className="wd-100 flexRow"
                     style={{ minWidth: "300px" }}
                   >
-                    <Card.Body>
+                    <Card.Body >
+                      <div className="d-flex">
                       <Card.Img
                         className="card-img-top"
                         variant="top"
+                    style={{ minWidth: "100px" ,maxWidth:"100px" }}
                         src={product.img}
                       />
+                      <div>
+                      <Card.Text className="text bold p-1 m-0">{product.name}</Card.Text>
+                      <Card.Text className="text p-0 m-0">{`₹${product.price}`}/-</Card.Text>
+                      </div>
+                      </div>
                       <Card.Text className="text">ID: {product._id}</Card.Text>
-                      <Card.Text className="text">{product.name}</Card.Text>
-                      <Card.Text className="text">{`₹${product.price}`}</Card.Text>
+                      <Card.Text className="p-0 m-0" style={{ color:"#575653" , fontSize:"13px" }}>
+                        {product.description}
+                      </Card.Text>
                       <Card.Text className="text">
                         {product.veg ? (
                           <img

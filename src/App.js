@@ -30,7 +30,7 @@ import { AnimatePresence } from "framer-motion";
 
 function App() {
   return (
-    <AnimatePresence exitBeforeEnter initial={false}>
+    <AnimatePresence exitBeforeEnter>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />

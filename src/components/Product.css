@@ -66,6 +66,17 @@
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
+.bold{
+  font-style: oblique;
+}
+.description{
+  overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+           line-clamp: 2; 
+   -webkit-box-orient: vertical;
+}
 .titlesCart {
   display: flex;
   flex-direction: column;
@@ -73,4 +84,9 @@
   font-size: large;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+}
+@media only screen and (max-width: 600px) {
+ .body {
+    color: rgb(0, 6, 8);
+  }
 }
