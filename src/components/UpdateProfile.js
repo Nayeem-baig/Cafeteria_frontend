@@ -7,6 +7,7 @@ import styles from "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
 import { BsEyeSlashFill ,BsEyeFill } from "react-icons/bs";
 import { motion } from "framer-motion";
+import Navi from "./Navi";
 
 const UpdateProfile = () => {
   const navigate = useNavigate();
@@ -79,12 +80,14 @@ const UpdateProfile = () => {
   };
   return (
     <motion.div 
+    className="body"
     initial={{opacity:0}}
     animate={{opacity:1}}
     transition={{duration:0.2}}
     exit={{opacity:0}}
     >
-    <div className="body">
+     <div className="loginpage align-content-center justify-content-center d-flex">
+    <Navi />
       <form method="post" className="Auth-form bodyCon" onSubmit={handleSubmit}>
         <div className="logo">
           <h1>Change password</h1>

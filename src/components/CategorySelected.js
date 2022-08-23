@@ -15,6 +15,8 @@ import Container from "react-bootstrap/Container";
 import { Row, Col } from "reactstrap";
 import Navi from "./Navi";
 import { motion } from "framer-motion";
+import { AiFillHeart , AiOutlineHeart} from 'react-icons/ai';
+
 
 const CategorySelected = () => {
   const notify = (noti) =>
@@ -56,6 +58,7 @@ const CategorySelected = () => {
     }, 1000);
     return () => window.removeEventListener("beforeunload", unloadCallback);
   }, [updates]);
+  
   const loadFavouritess = async () => {
     var config = {
       method: "get",
@@ -77,33 +80,6 @@ const CategorySelected = () => {
   };
 
   const token = localStorage.getItem("token");
-  function handleFav(x) {
-    var axios = require("axios");
-    var data = JSON.stringify({
-      id: x._id,
-    });
-
-    var config = {
-      method: "post",
-      url: "http://localhost:4000/users/add_favourites",
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        notify(x.name + " Added to favourites");
-      })
-      .catch(function (error) {
-        if ((error = 409)) {
-          console.log("Item already in fav");
-        } else console.log(error);
-      });
-  }
 
   const loadProducts = async (selectCat) => {
     console.log("selectCat", selectCat);
@@ -402,14 +378,15 @@ const CategorySelected = () => {
   };
   return (
     <motion.div 
+    className="body"
     initial={{opacity:0}}
     animate={{opacity:1}}
     transition={{duration:0.2}}
     exit={{opacity:0}}
     >
-    <div >
+    <div className="body">
       <Navi />
-      <div className="titles margin-top-10">{selectedCategory}</div>
+      <div  style={{ textTransform: "uppercase" }} className="titles margin-top-10">{selectedCategory}</div>
       <div className="d-flex mb-3">
         <Col lg="2">
         <input
@@ -440,37 +417,45 @@ const CategorySelected = () => {
                     className="wd-100 d-flex flexRow "
                     style={{ minWidth: "300px" ,maxWidth:"300px" }}
                   >
-                    <Card.Body >
-                      <div className="d-flex">
+                    <Card.Body className="wd-100">
+                      <div className="d-flex wd-100">
                       <Card.Img
                         className="card-img-top"
                         variant="top"
                     style={{ minWidth: "100px" ,maxWidth:"100px" }}
                         src={product.img}
                       />
-                      <div>
+                      <div className="wd-100">
                       <Card.Text className="text bold p-1 m-0">{product.name}</Card.Text>
                       <Card.Text className="text p-0 m-0">{`₹${product.price}`}/-</Card.Text>
-                      </div>
-                      </div>
-                      <Card.Text className="p-0 m-0 description" style={{ color:"#575653" , fontSize:"13px" , maxlines: "2"}}>
-                        {product.description}
-                      </Card.Text>
-                      <div className="text">
-                      {product.veg ? (
+                      <div className="d-flex justify-content-between wd-100">
+                       {product.veg ? (
                               <img
-                              className="card-img-icon"
+                              className="ml-2 card-img-icon"
                               variant="top"
                               src={require("../assets/veg.jpg")}
                               />
                               ) : (
                                 <img
                                 src={require("../assets/nonveg.jpg")}
-                                className="card-img-icon"
+                                className=" ml-2 card-img-icon"
                                 />
                             )}
+                             {favourites.length > 0 && favourites.filter((d) => d._id === product._id)
+                          .length === 1 ? (
+                          <AiFillHeart style={{ size: "40px"}} className="heartIcon"  onClick={() => removeFav(product)}/>
+                        ) : (
+                          <AiOutlineHeart className="heartIconempty" onClick={() => handleFav(product)}/>
+                        )}
                       </div>
-                      <div>
+                      </div>
+                      </div>
+                      <Card.Text className="p-0 m-0 description" style={{ color:"#575653" , fontSize:"13px" , minInlineSize: "2",maxlines: "2"}}>
+                        {product.description}
+                      </Card.Text>
+                      <div className="justify-content-between">
+                      </div>
+                      <div className="bottomButtons">
                         {cartData.filter((d) => d.productID == product._id)
                           .length === 1 ? (
                           <div className="btns">
@@ -489,24 +474,6 @@ const CategorySelected = () => {
                             className="w-100 buttons"
                           >
                             Add to cart
-                          </Button>
-                        )}
-                        {favourites.length > 0 && favourites.filter((d) => d._id === product._id)
-                          .length === 1 ? (
-                          <Button
-                            onClick={() => removeFav(product)}
-                            variant="light"
-                            className="w-100 buttons"
-                          >
-                            Remove from Favourites
-                          </Button>
-                        ) : (
-                          <Button
-                            onClick={() => handleFav(product)}
-                            variant="danger"
-                            className="w-100 buttons"
-                          >
-                            Add to Favourites
                           </Button>
                         )}
                       </div>

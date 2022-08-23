@@ -84,6 +84,7 @@ const AdminLogin = () => {
     <div className="loginbody">
       <form method="post" className="Auth-form bodyCon" onSubmit={handleSubmit}>
         <div className="logo">
+        <p className="title">Cafeteria❞</p>
           <h1>Admin Login</h1>
         </div>
         <div>

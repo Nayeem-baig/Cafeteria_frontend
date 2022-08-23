@@ -30,10 +30,10 @@ const Checkout_btn = () => {
       <div className="titlesCart">
         <p className="titlesCart">Sub Amount: ₹{amt()}/-</p>
         <p className="titlesCart">
-          Discount : 5% - {Math.floor(amount * 0.05)}/-
+          Discount : 5% - ₹{Math.floor(amount * 0.05)}/-
         </p>
         <p className="titlesCart">
-          Taxes & Charges : 9% + {Math.floor(amount * 0.09)}/-
+          Taxes & Charges : 9% + ₹{Math.floor(amount * 0.09)}/-
         </p>
         <p className="titlesCart">
           Total Amount: ₹{Math.floor(amount + amount * 0.09 - amount * 0.05)}

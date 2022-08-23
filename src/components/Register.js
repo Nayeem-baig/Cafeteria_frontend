@@ -119,6 +119,7 @@ const Register = () => {
     <div className="loginbody">
       <form method="post" className="Auth-form bodyCon" onSubmit={handleSubmit}>
         <div className="logo">
+        <p className="title">Cafeteria❞</p>
           <h1>Register</h1>
         </div>
         <div>

@@ -94,6 +94,7 @@ const Orderhistory = () => {
     animate={{opacity:1}}
     transition={{duration:0.2}}
     exit={{opacity:0}}
+    className="body"
     >
     <div>
       <AdminNavi />
@@ -109,25 +110,19 @@ const Orderhistory = () => {
         />
       </div>
         </Col>
-      <Col lg="12">
+      <Col lg="14">
         <Card className="bgcard w-100 p-3 m-0">
-          <Card.Body className="d-flex align-items-center w-100 p-0 m-0">
+          <Card.Body className="d-flex align-items-center font-weight-bold w-100 p-0 m-0">
             <Col lg="2">
               <Card.Text>Name</Card.Text>
             </Col>
-            <Col lg="2">
+            <Col lg="3">
               <Card.Text>Email:</Card.Text>
             </Col>
-            <Col lg="3">
+            <Col lg="5">
               <Card.Text>ID: </Card.Text>
             </Col>
-            <Col lg="1">
-              <Card.Text>Role:</Card.Text>
-            </Col>
-            <Col lg="1">
-              <Card.Text>Status:</Card.Text>
-            </Col>
-            <Col lg="3" className="text-center">
+            <Col lg="2" className="text-center">
               <Card.Text>Actions</Card.Text>
             </Col>
           </Card.Body>
@@ -150,19 +145,11 @@ const Orderhistory = () => {
                       <Col lg="2">
                         <Card.Text>{user.name}</Card.Text>
                       </Col>
-                      <Col lg="2">
+                      <Col lg="3">
                         <Card.Text>{user.email}</Card.Text>
                       </Col>
-                      <Col lg="3">
+                      <Col lg="5">
                         <Card.Text>{user._id}</Card.Text>
-                      </Col>
-                      <Col lg="1">
-                        <Card.Text>{user.role}</Card.Text>
-                      </Col>
-                      <Col lg="2">
-                        <Card.Text>
-                          {user.blockstatus ? "Blocked" : "Active"}
-                        </Card.Text>
                       </Col>
                       <Col lg="2">
                         {user.blockstatus ? (

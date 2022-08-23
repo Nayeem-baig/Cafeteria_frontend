@@ -66,16 +66,13 @@ const AdminDasboard = () => {
     const str = formatDistance(new Date(dateStr), new Date());
     return <h3>{str} ago.</h3>;
   }
-  function getuser(orderedBy) {
-    const orderedByName = users.filter((x) => x._id === orderedBy)
-    return orderedByName[0]?.name;
-  }
   return (
     <motion.div 
     initial={{opacity:0}}
     animate={{opacity:1}}
     transition={{duration:0.2}}
     exit={{opacity:0}}
+    className="body"
     >
     <div className="">
       <AdminNavi />
@@ -86,7 +83,7 @@ const AdminDasboard = () => {
         orders.map((product) => (
           <div>
             <div>{conDate(product.createdAt)}</div>
-            <h5 style={{ textTransform: "uppercase"}}>Customer name: {product.orderedBy}</h5>
+            <h5 style={{ textTransform: "uppercase"}}>Customer name: {product.customerName}</h5>
             <h6>Total order value :{product.total}/-</h6>
             <Row>
               {product.items.length > 0 &&

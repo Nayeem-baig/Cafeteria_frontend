@@ -15,35 +15,14 @@ import { motion } from "framer-motion";
 
 const Orderhistory = () => {
   const [orders, setOrders] = useState("");
-  const [users, setUsers] = useState([]);
   const [totalamt, setTotal] = useState(0);
   useEffect(() => {
-    loadAllUsers();
     loadOrderHistory();
   }, []);
   const token = localStorage.getItem("token");
   const totalAmount = useSelector((state) => state?.CartReduser);
   console.log("first", totalAmount);
-  function loadAllUsers() {
-    var axios = require("axios");
-
-    var config = {
-      method: "get",
-      url: "http://localhost:4000/users/listAllUsers",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        setUsers(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+ 
   function conDate(dateNo) {
     const dateStr = dateNo;
     const str = formatDistance(new Date(dateStr), new Date());
@@ -78,6 +57,7 @@ const Orderhistory = () => {
     animate={{opacity:1}}
     transition={{duration:0.2}}
     exit={{opacity:0}}
+    className="body"
     >
     <div>
       <Navi />

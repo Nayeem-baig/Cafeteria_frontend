@@ -66,7 +66,7 @@ const Profile = () => {
       transition={{duration:0.2}}
       exit={{opacity:0}}
       >
-      <div className="align-content-center justify-content-center d-flex">
+      <div className="loginpage align-content-center justify-content-center d-flex">
         <Navi />
         <div className="d-flex margin-top-10">
           <Card
