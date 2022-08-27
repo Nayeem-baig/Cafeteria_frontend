@@ -23,7 +23,6 @@ const AddCategory = () => {
   };
   const handleSubmit = (event) => {
     const newRecord = { ...addItem };
-    console.log(newRecord);
   };
   const PostData = async (event) => {
     event.preventDefault();

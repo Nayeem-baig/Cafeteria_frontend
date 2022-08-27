@@ -15,7 +15,6 @@ const Checkout_btn = () => {
   const token = localStorage.getItem("token");
   const cartData = useSelector((state) => state?.CartReduser);
   const totalAmount = useSelector((state) => state?.TotalReduser);
-  console.log(totalAmount)
   const amt = () => {
     for (let i = 0; i < cartData.length; i++) {
       amount = amount + cartData[i].price * cartData[i].cartQuantity;
@@ -81,7 +80,6 @@ const Checkout_btn = () => {
   
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         toast(response.data);
         navigate("/allcategory");
         window.location.reload();

@@ -30,7 +30,6 @@ const Favourites = () => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const cartData = useSelector((state) => state?.CartReduser);
-  console.log("cartData", cartData);
   const dispatch = useDispatch();
   const [favourites, setFavourites] = useState([]);
   let userFavs;
@@ -59,7 +58,6 @@ const Favourites = () => {
       .then(function (response) {
         userFavs = response.data;
         setFavourites(userFavs);
-        console.log("userFavs", userFavs);
       })
       .catch(function (error) {
         console.log(error);
@@ -100,7 +98,6 @@ const Favourites = () => {
     dispatch({ type: "ADD_PRODUCT_TO_CART", payload: product });
     toast(product.name + " added to cart");
   };
-  console.log(favourites);
     return (
       <motion.div
         className="body"

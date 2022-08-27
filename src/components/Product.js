@@ -32,7 +32,6 @@ const Product = () => {
   const cartData = useSelector((state) => state?.CartReduser);
   var cartQuantity = useSelector((state) => state?.CartReduser);
   const favourites = useSelector((state) => state?.FavouritesReduser);
-  console.log("cartdataaaaa", cartData);
   const updates = useSelector((state) => state?.UpdatesReduser);
   const dispatch = useDispatch();
   const [recommended, setRecommended] = useState([]);
@@ -134,7 +133,6 @@ const Product = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response);
         dispatch({ type: "ADDED", payload: response.data });
         notify(product.name + " Added to favourites");
       })
@@ -164,7 +162,6 @@ const Product = () => {
     axios(config)
       .then(function (response) {
         dispatch({ type: "REMOVE", payload: response.data });
-        // console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
         console.log(error);

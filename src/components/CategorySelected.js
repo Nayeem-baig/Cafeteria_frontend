@@ -33,10 +33,9 @@ const CategorySelected = () => {
   const alreadyFavourites = useSelector((state) => state?.FavouritesReduser);
   const updates = useSelector((state) => state?.UpdatesReduser);
   const selectedCategory = useSelector((state) => state?.SelectCategory);
-  console.log("selectedCategory", selectedCategory);
   const [search, setSearch] = useState("");
+  const [vegon , setVegon] = useState("")
   const [favourites, setFavourites] = useState([]);
-  console.log("cartData", cartData);
   const dispatch = useDispatch();
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
@@ -44,7 +43,6 @@ const CategorySelected = () => {
   let userFavs;
 
   useEffect(() => {
-    console.log(selectedCategory);
     loadProducts(selectedCategory);
     loadFavouritess();
     const unloadCallback = (event) => {
@@ -72,7 +70,6 @@ const CategorySelected = () => {
       .then(function (response) {
         userFavs = response.data;
         setFavourites(userFavs);
-        console.log("userFavs", userFavs);
       })
       .catch(function (error) {
         console.log(error);
@@ -82,7 +79,6 @@ const CategorySelected = () => {
   const token = localStorage.getItem("token");
 
   const loadProducts = async (selectCat) => {
-    console.log("selectCat", selectCat);
     if (selectCat === "burgers") {
       var config = {
         method: "get",
@@ -96,7 +92,6 @@ const CategorySelected = () => {
         .then(function (response) {
           item = response.data;
           setProduct(item);
-          console.log(item);
           return;
         })
         .catch(function (error) {
@@ -115,7 +110,6 @@ const CategorySelected = () => {
         .then(function (response) {
           item = response.data;
           setProduct(item);
-          console.log("loaddeed", item);
           return;
         })
         .catch(function (error) {
@@ -134,7 +128,6 @@ const CategorySelected = () => {
         .then(function (response) {
           item = response.data;
           setProduct(item);
-          console.log("loaddeed", item);
           return;
         })
         .catch(function (error) {
@@ -153,7 +146,6 @@ const CategorySelected = () => {
         .then(function (response) {
           item = response.data;
           setProduct(item);
-          console.log("loaddeed", item);
           return;
         })
         .catch(function (error) {
@@ -172,7 +164,6 @@ const CategorySelected = () => {
         .then(function (response) {
           item = response.data;
           setProduct(item);
-          console.log("loaddeed", item);
           return;
         })
         .catch(function (error) {
@@ -191,7 +182,6 @@ const CategorySelected = () => {
         .then(function (response) {
           item = response.data;
           setProduct(item);
-          console.log("loaddeed", item);
           return;
         })
         .catch(function (error) {
@@ -210,7 +200,6 @@ const CategorySelected = () => {
         .then(function (response) {
           item = response.data;
           setProduct(item);
-          console.log("loaddeed", item);
           return;
         })
         .catch(function (error) {
@@ -229,7 +218,6 @@ const CategorySelected = () => {
         .then(function (response) {
           item = response.data;
           setProduct(item);
-          console.log("loaddeed", item);
           return;
         })
         .catch(function (error) {
@@ -248,7 +236,6 @@ const CategorySelected = () => {
         .then(function (response) {
           item = response.data;
           setProduct(item);
-          console.log("loaddeed", item);
           return;
         })
         .catch(function (error) {
@@ -267,7 +254,6 @@ const CategorySelected = () => {
         .then(function (response) {
           item = response.data;
           setProduct(item);
-          console.log("loaddeed", item);
           return;
         })
         .catch(function (error) {
@@ -286,16 +272,15 @@ const CategorySelected = () => {
         .then(function (response) {
           item = response.data;
           setProduct(item);
-          console.log("loaddeed", item);
           return;
         })
         .catch(function (error) {
           console.log(error);
         });
-    } else if (selectCat === "samosa") {
+    } else if (selectCat === "chats") {
       var config = {
         method: "get",
-        url: "http://localhost:4000/product/samosa",
+        url: "http://localhost:4000/product/chats",
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -305,7 +290,6 @@ const CategorySelected = () => {
         .then(function (response) {
           item = response.data;
           setProduct(item);
-          console.log("loaddeed", item);
           return;
         })
         .catch(function (error) {
@@ -332,7 +316,6 @@ const CategorySelected = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response);
         dispatch({ type: "ADDED", payload: response.data });
         notify(product.name + " added to favourites");
       })
@@ -362,7 +345,6 @@ const CategorySelected = () => {
       .then(function (response) {
         dispatch({ type: "REMOVE", payload: response.data });
         toast.warn(product.name + " removed to favourites");
-        // console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
         console.log(error);
@@ -376,6 +358,7 @@ const CategorySelected = () => {
     dispatch({ type: "ADD_PRODUCT_TO_CART", payload: product });
     toast(product.name + " added to cart");
   };
+
   return (
     <motion.div 
     className="body"
@@ -400,7 +383,7 @@ const CategorySelected = () => {
       </div>
       <Row>
         {product.length > 0 &&
-          product
+          (product
             .filter((product) => {
               if (search == "") {
                 return product;
@@ -409,10 +392,10 @@ const CategorySelected = () => {
               ) {
                 return product;
               }
-            })
+            }))
             .map((product) => (
               <Col lg="3">
-                <div className="procon">
+                <div className="procon p-2 hover">
                   <Card
                     className="wd-100 d-flex flexRow "
                     style={{ minWidth: "300px" ,maxWidth:"300px" }}

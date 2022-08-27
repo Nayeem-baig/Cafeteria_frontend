@@ -87,7 +87,6 @@ const Register = () => {
       password: password,
     });
 
-    console.log(data);
     var config = {
       method: "post",
       url: "http://localhost:4000/users/register",

@@ -28,7 +28,6 @@ const Veg = () => {
   const cartData = useSelector((state) => state?.CartReduser);
   const favourites = useSelector((state) => state?.FavouritesReduser);
   const updates = useSelector((state) => state?.UpdatesReduser);
-  console.log("cartData", cartData);
   const dispatch = useDispatch();
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
@@ -74,7 +73,6 @@ const Veg = () => {
       })
       .catch(function (error) {
         if ((error = 409)) {
-          console.log("Item already in fav");
         } else console.log(error);
       });
   }
@@ -92,7 +90,6 @@ const Veg = () => {
       .then(function (response) {
         item = response.data;
         setProduct(item);
-        console.log(item);
       })
       .catch(function (error) {
         console.log(error);
@@ -137,7 +134,6 @@ const Veg = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response);
       dispatch({ type: "ADDED", payload: response.data });
 
         notify(x.name + " Added to favourites");

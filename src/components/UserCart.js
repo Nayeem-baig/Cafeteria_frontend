@@ -17,7 +17,6 @@ const UserCart = () => {
   const dispatch = useDispatch();
   const updates = useSelector((state) => state?.UpdatesReduser);
   const cartData = useSelector((state) => state?.CartReduser);
-console.log("hegjegehe", cartData)
   useEffect(() => {
     const unloadCallback = (event) => {
       event.preventDefault();
@@ -35,7 +34,6 @@ console.log("hegjegehe", cartData)
   const handlecart = (product) => {
     dispatch({ type: "REMOVE_PRODUCT_FROM_CART", payload: product });
     // dispatch({ type: "ADDED" , payload:product });
-    console.log(product);
   };
   const increase = (productID) => {
     dispatch({ type: "ADD", payload: productID });
@@ -68,7 +66,7 @@ console.log("size" + (cartData.length === 0) )
           </Button>
         </div>
       ) : (
-        <div className="p-0 m-0">
+        <div className="body p-0 m-0">
         <div>
           <Navi />
           <div className="titles margin-top-10 mb-2">Cart</div>
@@ -76,7 +74,7 @@ console.log("size" + (cartData.length === 0) )
             {cartData.length > 0 &&
               cartData.map((product) => (
                 <Col lg="12">
-                  <div className="m-0 p-0 ">
+                  <div className="body m-0 p-0 ">
                     <Card className="bgcard w-100 p-0 m-0">
                       <Card.Body className="d-flex align-items-center w-100 p-0 m-0">
                         <Row className="w-100">

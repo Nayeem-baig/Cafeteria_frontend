@@ -21,7 +21,6 @@ const Orderhistory = () => {
   }, []);
   const token = localStorage.getItem("token");
   const totalAmount = useSelector((state) => state?.CartReduser);
-  console.log("first", totalAmount);
  
   function conDate(dateNo) {
     const dateStr = dateNo;
@@ -44,7 +43,6 @@ const Orderhistory = () => {
         // console.log(JSON.stringify(response.data));
         const uorders = response.data;
         setOrders(uorders);
-        console.log(uorders);
       })
       .catch(function (error) {
         console.log(error);

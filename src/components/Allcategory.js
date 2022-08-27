@@ -44,7 +44,6 @@ const Allcategory = () => {
   };
   const takeCategory = (category) => {
     dispatch({ type: "TAKE_CATEGORY", payload: category });
-    console.log(category);
     navigate("/selectedcat");
   };
 
@@ -81,8 +80,8 @@ const Allcategory = () => {
               return product;
             }
           }).map((product) => (
-            
-            <Col lg="3">
+        
+            <Col className="procon" lg="3">
               <div
                 className="mb-3 ml-3 mr-3"
                 onClick={() => takeCategory(product.name)}
@@ -107,6 +106,7 @@ const Allcategory = () => {
                 </Card>
               </div>
             </Col>
+           
           ))}
       </Row>
     </div>

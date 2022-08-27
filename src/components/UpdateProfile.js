@@ -68,7 +68,6 @@ const UpdateProfile = () => {
     
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
       toast(response.data);
       navigate("/profile")
     })

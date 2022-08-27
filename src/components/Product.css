@@ -78,6 +78,11 @@
            line-clamp: 2; 
    -webkit-box-orient: vertical;
 }
+
+.procon:hover{
+  transform: scale3d(1.05, 1.05, 1);
+  transition: 0.5s;
+}
 .heartIcon{
   align-items: flex-end;
   justify-content: flex-start;

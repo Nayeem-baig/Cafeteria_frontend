@@ -29,7 +29,6 @@ const Nonveg = () => {
   const cartData = useSelector((state) => state?.CartReduser);
   const favourites = useSelector((state) => state?.FavouritesReduser);
   const updates = useSelector((state) => state?.UpdatesReduser);
-  console.log("cartData", cartData);
   const dispatch = useDispatch();
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
@@ -93,7 +92,6 @@ const Nonveg = () => {
       .then(function (response) {
         item = response.data;
         setProduct(item);
-        console.log(item);
       })
       .catch(function (error) {
         console.log(error);
@@ -138,7 +136,6 @@ const Nonveg = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response);
       dispatch({ type: "ADDED", payload: response.data });
 
         notify(x.name + " Added to favourites");
@@ -169,7 +166,6 @@ const Nonveg = () => {
     axios(config)
     .then(function (response) {
       dispatch({ type: "REMOVE", payload: response.data });
-      // console.log(JSON.stringify(response.data));
     })
     .catch(function (error) {
       console.log(error);
@@ -180,7 +176,6 @@ const Nonveg = () => {
     dispatch({type: "REMOVE_PRODUCT_FROM_CART", payload : product})
   }
   const handlecart = (x) => {
-    console.log(x);
     dispatch({ type: "ADD_PRODUCT_TO_CART", payload: x });
   };
   function RenderFunc() {
