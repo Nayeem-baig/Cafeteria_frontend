@@ -48,68 +48,70 @@ const Allcategory = () => {
   };
 
   return (
-    <motion.div 
-    className="body"
-    initial={{opacity:0}}
-    animate={{opacity:1}}
-    transition={{duration:0.2}}
-    exit={{opacity:0}}
+    <motion.div
+      className="body"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
+      exit={{ opacity: 0 }}
     >
-    <div className="body">
-      <Navi/>
-      <p className="titles margin-top-10">All categories</p>
-      <div className="d-flex mb-3">
-        <Col lg="2">
-        <input
-          className="form-control"
-          style={{ minWidth: "300px" }}
-          type="text"
-          placeholder="Search..."
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        </Col>
-      </div>
-      <Row>
-        {category.length > 0 &&
-          category.filter((product) => {
-            if (search == "") {
-              return product;
-            } else if (
-              product.name.toLowerCase().includes(search.toLowerCase())
-            ) {
-              return product;
-            }
-          }).map((product) => (
-        
-            <Col className="procon" lg="3">
-              <div
-                className="mb-3 ml-3 mr-3"
-                onClick={() => takeCategory(product.name)}
-              >
-              <Card
-                    className="wd-100 flexRow"
-                    style={{ minWidth: "300px" }}
+      <div className="body">
+        <Navi />
+        <p className="titles margin-top-10">All categories</p>
+        <div className="d-flex mb-3">
+          <Col lg="2">
+            <input
+              className="form-control"
+              style={{ minWidth: "300px" }}
+              type="text"
+              placeholder="Search..."
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </Col>
+        </div>
+        <Row>
+          {category.length > 0 &&
+            category
+              .filter((product) => {
+                if (search == "") {
+                  return product;
+                } else if (
+                  product.name.toLowerCase().includes(search.toLowerCase())
+                ) {
+                  return product;
+                }
+              })
+              .map((product) => (
+                <Col className="procon m-0 hover" lg="3">
+                  <motion.div layout>
+                  <div
+                    className="mb-3 ml-3 mr-3"
+                    onClick={() => takeCategory(product.name)}
                   >
-                  <Card.Body>
-                    <Card.Img
-                      className="card-img-top"
-                      variant="top"
-                      src={product.img}
-                    />
-                    <Card.Text
-                      style={{ textTransform: "uppercase" }}
-                      className="text category"
+                    <Card
+                      className="wd-100 flexRow"
+                      style={{ minWidth: "300px" }}
                     >
-                      {product.name}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </div>
-            </Col>
-           
-          ))}
-      </Row>
-    </div>
+                      <Card.Body>
+                        <Card.Img
+                          className="card-img-top"
+                          variant="top"
+                          src={product.img}
+                        />
+                        <Card.Text
+                          style={{ textTransform: "uppercase" }}
+                          className="text category"
+                        >
+                          {product.name}
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </div>
+                  </motion.div>
+                  </Col>
+              ))}
+        </Row>
+      </div>
     </motion.div>
   );
 };

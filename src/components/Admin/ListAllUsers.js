@@ -140,7 +140,8 @@ const Orderhistory = () => {
           .map((user) => (    
               <Row>
                 <Col lg="12">
-                  <Card className="bgcard w-100 p-3 m-0">
+                <motion.div layout>
+                  <Card className="bgcard w-100 p-3 m-0" style={{minWidth: "900px"}}>
                     <Card.Body className="d-flex align-items-center p-0 m-0">
                       <Col lg="2">
                         <Card.Text>{user.name}</Card.Text>
@@ -164,6 +165,7 @@ const Orderhistory = () => {
                       </Col>
                     </Card.Body>
                   </Card>
+                </motion.div>
                 </Col>
               </Row>
           ))}

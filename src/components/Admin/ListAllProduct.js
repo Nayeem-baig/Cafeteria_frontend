@@ -120,7 +120,7 @@ const ListAllProduct = () => {
     <motion.div 
     initial={{opacity:0}}
     animate={{opacity:1}}
-    transition={{duration:0.2}}
+    transition={{duration:0.5}}
     exit={{opacity:0}}
     >
     <div className="body">
@@ -156,6 +156,7 @@ const ListAllProduct = () => {
             })
             .map((product) => (
               <Col lg="3">
+                  <motion.div layout>
                 <div className="mb-3 ml-3 mr-3">
                   <Card
                     className="wd-100 flexRow"
@@ -206,6 +207,7 @@ const ListAllProduct = () => {
                     </Card.Body>
                   </Card>
                 </div>
+                </motion.div>
               </Col>
             ))}
       </Row>

@@ -360,11 +360,11 @@ const CategorySelected = () => {
   };
 
   return (
-    <motion.div 
+    <motion.div
     className="body"
     initial={{opacity:0}}
     animate={{opacity:1}}
-    transition={{duration:0.2}}
+    transition={{duration:0.5}}
     exit={{opacity:0}}
     >
     <div className="body">
@@ -395,6 +395,7 @@ const CategorySelected = () => {
             }))
             .map((product) => (
               <Col lg="3">
+                <motion.div layout>
                 <div className="procon p-2 hover">
                   <Card
                     className="wd-100 d-flex flexRow "
@@ -463,6 +464,7 @@ const CategorySelected = () => {
                     </Card.Body>
                   </Card>
                 </div>
+              </motion.div>
               </Col>
             ))}
       </Row>

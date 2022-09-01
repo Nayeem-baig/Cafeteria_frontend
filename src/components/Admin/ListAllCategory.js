@@ -135,6 +135,7 @@ const ListAllCategory = () => {
             }
           }).map((product) => (
             <Col lg="3">
+                  <motion.div layout>
               <div
                 style={{ marginBottom: "20px", margin: "20px" }}
                 className="catBox mb-3 ml-3 mr-3"
@@ -175,6 +176,7 @@ const ListAllCategory = () => {
                   </Card.Body>
                 </Card>
               </div>
+              </motion.div>
             </Col>
           ))}
       </Row>

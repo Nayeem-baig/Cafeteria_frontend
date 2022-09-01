@@ -135,7 +135,7 @@ console.log("size" + (cartData.length === 0) )
                                 >
                                   +
                                 </Button>
-                                <div className="mr-3 ml-3">
+                                <div className="mr-3 ml-3 titlesCart">
                                   {" "}
                                   {product.cartQuantity}
                                 </div>
