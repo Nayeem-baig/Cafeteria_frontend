@@ -98,13 +98,13 @@ const Register = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         const succeful = 1;
         alert("Register successful please login to continue.");
         handleReg(succeful);
       })
       .catch(function (error) {
-        alert(error);
+        console.log(error)
+          toast.error(error.response.data)
       });
   };
 

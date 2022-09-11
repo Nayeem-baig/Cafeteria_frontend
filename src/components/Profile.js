@@ -50,7 +50,9 @@ const Profile = () => {
   };
   function logout() {
     localStorage.removeItem("token");
-    navigate("/login");
+    const table = localStorage.getItem("table");
+    navigate("/login/"+table);
+    localStorage.removeItem("table");
   }
   function update() {
     navigate("/updateprofile");
@@ -58,7 +60,7 @@ const Profile = () => {
   function orderHistory() {
     navigate("/orderhistory");
   }
-  function RenderFunc() {
+
     return (
       <motion.div 
       initial={{opacity:0}}
@@ -120,6 +122,4 @@ const Profile = () => {
     );
   }
 
-  return <RenderFunc />;
-};
 export default Profile;

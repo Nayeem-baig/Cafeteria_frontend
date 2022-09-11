@@ -23,7 +23,7 @@ const Checkout_btn = () => {
     return amount;
   };
   amount = 0;
-   
+
   return (
     <div>
       <div className="titlesCart">
@@ -53,21 +53,22 @@ const Checkout_btn = () => {
             className="m-10 justify-content-center align-items-center"
           >
             Pay {Math.floor(amount + amount * 0.09 - amount * 0.05)}/-
-
             <BsWallet2 />
           </Button>
         </div>
       </div>
     </div>
   );
-  
+
   function checkout(cartData) {
     var axios = require("axios");
+    const table = localStorage.getItem("table");
     var data = JSON.stringify({
       order: cartData,
-      total : Math.floor(amount + amount * 0.09 - amount * 0.05)
+      total: Math.floor(amount + amount * 0.09 - amount * 0.05),
+      table: table,
     });
-  
+
     var config = {
       method: "post",
       url: "http://localhost:4000/orders",
@@ -77,17 +78,17 @@ const Checkout_btn = () => {
       },
       data: data,
     };
-  
+
     axios(config)
       .then(function (response) {
         toast(response.data);
+        dispatch({ type: "CLEAR_CART", payload: "claer" });
         navigate("/allcategory");
-        window.location.reload();
       })
       .catch(function (error) {
         console.log(error);
       });
-    }
+  }
 };
 
 export default Checkout_btn;

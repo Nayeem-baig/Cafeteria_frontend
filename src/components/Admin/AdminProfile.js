@@ -49,7 +49,7 @@ const AdminProfile = () => {
   };
   function logout() {
     localStorage.removeItem("token");
-    navigate("/login");
+    navigate("/adminlogin");
   }
   function update() {
     navigate("/updateprofile");

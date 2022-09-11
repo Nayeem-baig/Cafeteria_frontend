@@ -84,6 +84,7 @@ const AdminDasboard = () => {
           <div>
             <div>{conDate(product.createdAt)}</div>
             <h5 style={{ textTransform: "uppercase"}}>Customer name: {product.customerName}</h5>
+            <h6>Table number :{product.table}</h6>
             <h6>Total order value :{product.total}/-</h6>
             <Row>
               {product.items.length > 0 &&

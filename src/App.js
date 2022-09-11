@@ -33,6 +33,7 @@ function App() {
     <AnimatePresence exitBeforeEnter>
       <BrowserRouter>
         <Routes>
+          <Route path="/login/:table" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/allcategory" element={<Allcategory />} />
