@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Checkout from "./Checkout_btn";
 import styles from "./Product.css";
-import Navbar from "react-bootstrap/Navbar";
 import { Col, Row } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
 import Navi from "./Navi";
 import { motion } from "framer-motion";
 
@@ -43,145 +41,148 @@ const UserCart = () => {
     dispatch({ type: "SUB", payload: productID });
     dispatch({ type: "ADDED", payload: productID });
   };
-console.log("size" + (cartData.length === 0) )
+  console.log("size" + (cartData.length === 0));
   return (
-    <motion.div 
-    initial={{opacity:0}}
-    animate={{opacity:1}}
-    transition={{duration:0.2}}
-    exit={{opacity:0}}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
+      exit={{ opacity: 0 }}
     >
-    <div>
-      {cartData.length === 0 ? (
-       
-        <div>
-          <Navi />
-          <img src={require("../assets/emptyCart.jpg")} className="wd-100" />
-          <Button
-            onClick={() => navigate("/allcategory")}
-            variant="danger"
-            className="w-100 mt-3"
-          >
-            Browse
-          </Button>
-        </div>
-      ) : (
-        <div className="body p-0 m-0">
-        <div>
-          <Navi />
-          <div className="titles margin-top-10 mb-2">Cart</div>
-          <Row>
-            {cartData.length > 0 &&
-              cartData.map((product) => (
-                <Col lg="12">
-                  <div className="body m-0 p-0 ">
-                    <Card className="bgcard w-100 p-0 m-0">
-                      <Card.Body className="d-flex align-items-center w-100 p-0 m-0">
-                        <Row className="w-100">
-                          <Col lg="2" className="text">
-                            <Card.Img
-                              className="card-img-top card-img-cart"
-                              variant="top"
-                              src={product.img}
-                            />
-                          </Col>
-                          <Col
-                            lg="3"
-                            className=" d-flex justify-content-center align-items-center"
-                          >
-                            <Card.Text>{product.name}</Card.Text>
-                          </Col>
-                          <Col
-                            lg="1"
-                            className=" d-flex justify-content-center align-items-center"
-                          >
-                            <Card.Text>{`₹${product.price}`}</Card.Text>
-                          </Col>
-                          <Col
-                            lg="1"
-                            className=" d-flex justify-content-center align-items-center"
-                            >
-                            {product.veg ? (
-                              <img
-                              className="card-img-icon"
-                              variant="top"
-                              src={require("../assets/veg.jpg")}
-                              />
-                              ) : (
-                                <img
-                                src={require("../assets/nonveg.jpg")}
-                                className="card-img-icon"
+      <div>
+        {cartData.length === 0 ? (
+          <div>
+            <Navi />
+            <img src={require("../assets/emptyCart.jpg")} className="wd-100" />
+            <Button
+              onClick={() => navigate("/allcategory")}
+              variant="danger"
+              className="w-100 mt-3"
+            >
+              Browse
+            </Button>
+          </div>
+        ) : (
+          <div className="body p-0 m-0">
+            <div>
+              <Navi />
+              <div className="titles margin-top-10 mb-2">Cart</div>
+              <Row>
+                {cartData.length > 0 &&
+                  cartData.map((product) => (
+                    <Col lg="12">
+                      <div className="body m-0 p-0 ">
+                        <Card className="bgcard w-100 p-0 m-0">
+                          <Card.Body className="d-flex align-items-center w-100 p-0 m-0">
+                            <Row className="w-100">
+                              <Col lg="2" className="text">
+                                <Card.Img
+                                  className="card-img-top card-img-cart"
+                                  variant="top"
+                                  src={product.img}
                                 />
-                            )}
-                          </Col>
-                          <Col
-                            lg="2"
-                            className="itemCont d-flex justify-content-center align-items-center"
-                          >
-                            <Card.Text className="text">
-                              {product.description}
-                            </Card.Text>
-                          </Col>
-                          <Col
-                            lg="2"
-                            className="itemCont d-flex justify-content-center align-items-center"
-                          >
-                            <div className="buttons">
-                              <div className="btns">
-                                <Button
-                                  onClick={() => increase(product.productID)}
-                                  variant="light"
-                                  className="incdec"
-                                >
-                                  +
-                                </Button>
-                                <div className="mr-3 ml-3 titlesCart">
-                                  {" "}
-                                  {product.cartQuantity}
-                                </div>
-                                {product.cartQuantity - 1 ? (
-                                  <Button
-                                    onClick={() =>
-                                      decrease(product.productID)
-                                    }
-                                    variant="light"
-                                    className="incdec"
-                                  >
-                                    -
-                                  </Button>
+                              </Col>
+                              <Col
+                                lg="3"
+                                className=" d-flex justify-content-center align-items-center"
+                              >
+                                <Card.Text>{product.name}</Card.Text>
+                              </Col>
+                              <Col
+                                lg="1"
+                                className=" d-flex justify-content-center align-items-center"
+                              >
+                                <Card.Text>{`₹${product.price}`}</Card.Text>
+                              </Col>
+                              <Col
+                                lg="1"
+                                className=" d-flex justify-content-center align-items-center"
+                              >
+                                {product.veg ? (
+                                  <img
+                                    className="card-img-icon"
+                                    variant="top"
+                                    src={require("../assets/veg.jpg")}
+                                  />
                                 ) : (
+                                  <img
+                                    src={require("../assets/nonveg.jpg")}
+                                    className="card-img-icon"
+                                  />
+                                )}
+                              </Col>
+                              <Col
+                                lg="2"
+                                className="itemCont d-flex justify-content-center align-items-center"
+                              >
+                                <Card.Text className="text">
+                                  {product.description}
+                                </Card.Text>
+                              </Col>
+                              <Col
+                                lg="2"
+                                className="itemCont d-flex justify-content-center align-items-center"
+                              >
+                                <div className="buttons">
+                                  <div className="btns">
+                                    <Button
+                                      onClick={() =>
+                                        increase(product.productID)
+                                      }
+                                      variant="light"
+                                      className="incdec"
+                                    >
+                                      +
+                                    </Button>
+                                    <div className="mr-3 ml-3 titlesCart">
+                                      {" "}
+                                      {product.cartQuantity}
+                                    </div>
+                                    {product.cartQuantity - 1 ? (
+                                      <Button
+                                        onClick={() =>
+                                          decrease(product.productID)
+                                        }
+                                        variant="light"
+                                        className="incdec"
+                                      >
+                                        -
+                                      </Button>
+                                    ) : (
+                                      <Button
+                                        onClick={() =>
+                                          handlecart(product.productID)
+                                        }
+                                        variant="light"
+                                        className=""
+                                      >
+                                        -
+                                      </Button>
+                                    )}
+                                  </div>
                                   <Button
                                     onClick={() =>
                                       handlecart(product.productID)
                                     }
-                                    variant="light"
-                                    className=""
+                                    variant="danger"
+                                    className="w-100 mt-3"
                                   >
-                                    -
+                                    Remove{" "}
                                   </Button>
-                                )}
-                              </div>
-                              <Button
-                                onClick={() => handlecart(product.productID)}
-                                variant="danger"
-                                className="w-100 mt-3"
-                              >
-                                Remove{" "}
-                              </Button>
-                            </div>
-                          </Col>
-                        </Row>
-                      </Card.Body>
-                    </Card>
-                  </div>
-                </Col>
-              ))}
-          </Row>
-        </div>
-        <Checkout />
+                                </div>
+                              </Col>
+                            </Row>
+                          </Card.Body>
+                        </Card>
+                      </div>
+                    </Col>
+                  ))}
+              </Row>
+            </div>
+            <Checkout />
+          </div>
+        )}
       </div>
-      )}
-    </div>
     </motion.div>
   );
 };

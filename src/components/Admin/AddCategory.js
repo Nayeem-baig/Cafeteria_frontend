@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import styles from "../Register.css";
-
 import { useState } from "react";
 import AdminButtons from "./ActionButtons";
 import AdminNavi from "./AdminNavi";

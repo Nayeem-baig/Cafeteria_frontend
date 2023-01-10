@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Navbar, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import { Link, useNavigate } from "react-router-dom";
 import AdminNavi from "./AdminNavi";
-import { Button } from "react-bootstrap";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import AdminButtons from "./ActionButtons";
 import formatDistance from "date-fns/formatDistance";
 import { motion } from "framer-motion";
 
@@ -13,13 +9,11 @@ const AdminDasboard = () => {
   const token = localStorage.getItem("token");
   const [orders, setOrders] = useState("");
   const [users, setUsers] = useState([]);
-  let username;
 
   useEffect(() => {
     loadorders();
     loadAllUsers();
   }, []);
-  const navigate = useNavigate();
   function loadAllUsers() {
     var axios = require("axios");
 
@@ -53,8 +47,10 @@ const AdminDasboard = () => {
 
     axios(config)
       .then(function (response) {
-        // console.log(JSON.stringify(response.data));
-        setOrders(response.data);
+        let orders = response.data;
+        orders.reverse();
+
+        setOrders(orders);
       })
       .catch(function (error) {
         console.log(error);
@@ -67,87 +63,87 @@ const AdminDasboard = () => {
     return <h3>{str} ago.</h3>;
   }
   return (
-    <motion.div 
-    initial={{opacity:0}}
-    animate={{opacity:1}}
-    transition={{duration:0.2}}
-    exit={{opacity:0}}
-    className="body"
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
+      exit={{ opacity: 0 }}
+      className="body"
     >
-    <div className="">
-      <AdminNavi />
-      {/* <AdminButtons/> */}
-      <h1 className="margin-top-10 title">Orders</h1>
-      {/* {console.log(orders)} */}
-      {orders.length > 0 &&
-        orders.map((product) => (
-          <div>
-            <div>{conDate(product.createdAt)}</div>
-            <h5 style={{ textTransform: "uppercase"}}>Customer name: {product.customerName}</h5>
-            <h6>Table number :{product.table}</h6>
-            <h6>Total order value :{product.total}/-</h6>
-            <Row>
-              {product.items.length > 0 &&
-                product.items.map((product) => (
-                  <Col lg="12">
-                    <div className="m-0 p-0 ">
-                      <Card className="bgcard w-100 p-0 m-0">
-                        <Card.Body className="d-flex align-items-center w-100 p-0 m-0">
-                          <Row className="w-100">
-                            <Col lg="2" className="text">
-                              <Card.Img
-                                className="card-img-top card-img-cart"
-                                variant="top"
-                                src={product.img}
-                              />
-                            </Col>
-                            <Col
-                              lg="2"
-                              className=" d-flex justify-content-center align-items-center"
-                            >
-                              <Card.Text>{product.name}</Card.Text>
-                            </Col>
-                            <Col
-                              lg="2"
-                              className=" d-flex justify-content-center align-items-center"
-                            >
-                              <Card.Text>{`₹${product.price}/-`}</Card.Text>
-                            </Col>
-                            <Col
-                              lg="1"
-                              className=" d-flex justify-content-center align-items-center"
-                            >
-                              {product.veg ? (
-                                <img
-                                  className="card-img-icon"
+      <div className="">
+        <AdminNavi />
+        <h1 className="margin-top-10 title">Orders</h1>
+        {orders.length > 0 &&
+          orders.map((product) => (
+            <div>
+              <div>{conDate(product.createdAt)}</div>
+              <h5 style={{ textTransform: "uppercase" }}>
+                Customer name: {product.customerName}
+              </h5>
+              <h6>Table number :{product.table}</h6>
+              <h6>Total order value :{product.total}/-</h6>
+              <Row>
+                {product.items.length > 0 &&
+                  product.items.map((product) => (
+                    <Col lg="12">
+                      <div className="m-0 p-0 ">
+                        <Card className="bgcard w-100 p-0 m-0">
+                          <Card.Body className="d-flex align-items-center w-100 p-0 m-0">
+                            <Row className="w-100">
+                              <Col lg="2" className="text">
+                                <Card.Img
+                                  className="card-img-top card-img-cart"
                                   variant="top"
-                                  src={require("../Admin/assets/veg.jpg")}
+                                  src={product.img}
                                 />
-                              ) : (
-                                <img
-                                  src={require("../Admin/assets/nonveg.jpg")}
-                                  className="card-img-icon"
-                                />
-                              )}
-                            </Col>
-                            <Col
-                              lg="2"
-                              className="itemCont d-flex justify-content-center align-items-center"
-                            >
-                              <Card.Text className="text">
-                                Quantity : {product.cartQuantity}
-                              </Card.Text>
-                            </Col>
-                          </Row>
-                        </Card.Body>
-                      </Card>
-                    </div>
-                  </Col>
-                ))}
-            </Row>
-          </div>
-        ))}
-    </div>
+                              </Col>
+                              <Col
+                                lg="2"
+                                className=" d-flex justify-content-center align-items-center"
+                              >
+                                <Card.Text>{product.name}</Card.Text>
+                              </Col>
+                              <Col
+                                lg="2"
+                                className=" d-flex justify-content-center align-items-center"
+                              >
+                                <Card.Text>{`₹${product.price}/-`}</Card.Text>
+                              </Col>
+                              <Col
+                                lg="1"
+                                className=" d-flex justify-content-center align-items-center"
+                              >
+                                {product.veg ? (
+                                  <img
+                                    className="card-img-icon"
+                                    variant="top"
+                                    src={require("../Admin/assets/veg.jpg")}
+                                  />
+                                ) : (
+                                  <img
+                                    src={require("../Admin/assets/nonveg.jpg")}
+                                    className="card-img-icon"
+                                  />
+                                )}
+                              </Col>
+                              <Col
+                                lg="2"
+                                className="itemCont d-flex justify-content-center align-items-center"
+                              >
+                                <Card.Text className="text">
+                                  Quantity : {product.cartQuantity}
+                                </Card.Text>
+                              </Col>
+                            </Row>
+                          </Card.Body>
+                        </Card>
+                      </div>
+                    </Col>
+                  ))}
+              </Row>
+            </div>
+          ))}
+      </div>
     </motion.div>
   );
 };

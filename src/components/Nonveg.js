@@ -1,17 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import Image from "react-bootstrap/Image";
-import styles from "./Product.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Navbar from 'react-bootstrap/Navbar';
-import { Nav } from "react-bootstrap";
-import Container from 'react-bootstrap/Container';
 import Navi from "./Navi";
 import { Row, Col } from "reactstrap";
 

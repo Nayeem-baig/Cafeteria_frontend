@@ -1,12 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
-import Navbar from "react-bootstrap/Navbar";
-import { Nav } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-import { BiHistory } from "react-icons/bi";
 import { BsFillPersonXFill } from "react-icons/bs";
 import { FiPhone } from "react-icons/fi";
 import { BiPencil } from "react-icons/bi";

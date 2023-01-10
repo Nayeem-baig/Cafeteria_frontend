@@ -3,9 +3,8 @@ import { useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import styles from "./Product.css";
 import { toast } from "react-toastify";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { BsWallet2, BsFillBagCheckFill } from "react-icons/bs";
-import { TbReceiptTax } from "react-icons/tb";
 import { useDispatch } from "react-redux";
 
 const Checkout_btn = () => {

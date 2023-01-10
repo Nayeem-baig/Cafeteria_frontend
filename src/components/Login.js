@@ -1,22 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
-import { Link, useNavigate , useParams} from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "./Login.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 import { BsEyeSlashFill, BsEyeFill } from "react-icons/bs";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 import { motion } from "framer-motion";
 
-
 const Login = () => {
-  const {table} = useParams();
+  const { table } = useParams();
   localStorage.setItem("table", table);
-  console.log(table)
+  console.log(table);
   const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState("password");
   const [userLogin, setUserLogin] = useState({

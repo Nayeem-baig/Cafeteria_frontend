@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { BsEyeSlashFill ,BsEyeFill } from "react-icons/bs";
 import { motion } from "framer-motion";
 import Navi from "./Navi";

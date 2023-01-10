@@ -1,9 +1,6 @@
 import React from "react";
-import { Col, Container, Navbar, Row } from "react-bootstrap";
-import Card from "react-bootstrap/Card";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AdminNavi from "./AdminNavi";
-import { Button } from "react-bootstrap";
 import AdminButtons from "./ActionButtons";
 import { motion } from "framer-motion";
 

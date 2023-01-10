@@ -4,8 +4,8 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.css";
-import { ToastContainer, toast } from "react-toastify";
-import { BsEyeSlashFill ,BsEyeFill } from "react-icons/bs";
+import { toast } from "react-toastify";
+import { BsEyeSlashFill, BsEyeFill } from "react-icons/bs";
 import { motion } from "framer-motion";
 
 const Register = () => {
@@ -44,7 +44,7 @@ const Register = () => {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
   }
   function isNameValid(name) {
-    return /^[A-Za-z]+$/.test(name);
+    return /^[A-Z a-z]+$/.test(name);
   }
 
   const PostData = async (event) => {
@@ -103,107 +103,111 @@ const Register = () => {
         handleReg(succeful);
       })
       .catch(function (error) {
-        console.log(error)
-          toast.error(error.response.data)
+        console.log(error);
+        toast.error(error.response.data);
       });
   };
 
   return (
-    <motion.div 
-    initial={{opacity:0}}
-    animate={{opacity:1}}
-    transition={{duration:0.2}}
-    exit={{opacity:0}}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
+      exit={{ opacity: 0 }}
     >
-    <div className="loginbody">
-      <form method="post" className="Auth-form bodyCon" onSubmit={handleSubmit}>
-        <div className="logo">
-        <p className="title">Cafeteria❞</p>
-          <h1>Register</h1>
-        </div>
-        <div>
-          <input
-            type="text"
-            className="form-control mt-1 mb-3"
-            value={userRegistration.name}
-            onChange={handleInput}
-            name="name"
-            id="name"
-            placeholder="Name"
-            autoComplete="on"
-          ></input>
-        </div>
-        <div>
-          <input
-            type="text"
-            className="form-control mt-1 mb-3"
-            onChange={handleInput}
-            value={userRegistration.username}
-            name="username"
-            id="username"
-            placeholder="Username"
-            autoComplete="on"
-          ></input>
-        </div>
-        <div>
-          <input
-            type="text"
-            className="form-control mt-1 mb-3"
-            onChange={handleInput}
-            value={userRegistration.email}
-            name="email"
-            id="email"
-            placeholder="Email"
-            autoComplete="on"
-          ></input>
-        </div>
-        <div>
-          <input
-            type="number"
-            className="form-control mt-1 mb-3"
-            onChange={handleInput}
-            value={userRegistration.phn}
-            name="phn"
-            id="phn"
-            placeholder="Phone number"
-            autoComplete="on"
-          ></input>
-        </div>
-        <div>
-          <input
-            type={passwordType}
-            className="form-control mt-1 mb-3"
-            onChange={handleInput}
-            value={userRegistration.password}
-            name="password"
-            id="password"
-            placeholder="Password"
-            autoComplete="on"
-          ></input>
-        </div>
-        <div>
-          <input
-            type={passwordType}
-            className="form-control mt-1 mb-3"
-            onChange={handleInput}
-            value={userRegistration.confirmPassword}
-            name="confirmPassword"
-            id="confirmPassword"
-            placeholder="Confirm password"
-            autoComplete="off"
-          ></input>
-        </div>
-        <div className="btn btn-outline-primary" onClick={togglePassword}>
-          {passwordType === "password" ? <BsEyeFill /> : <BsEyeSlashFill />}
-        </div>
-        <div className="text-center">
-          <Button className="button" onClick={PostData}>
-            Register
-          </Button>
-        </div>
-      </form>
-      <Link to="/login">Already have an account Login</Link>
-    </div>
+      <div className="loginbody">
+        <form
+          method="post"
+          className="Auth-form bodyCon"
+          onSubmit={handleSubmit}
+        >
+          <div className="logo">
+            <p className="title">Cafeteria❞</p>
+            <h1>Register</h1>
+          </div>
+          <div>
+            <input
+              type="text"
+              className="form-control mt-1 mb-3"
+              value={userRegistration.name}
+              onChange={handleInput}
+              name="name"
+              id="name"
+              placeholder="Name"
+              autoComplete="on"
+            ></input>
+          </div>
+          <div>
+            <input
+              type="text"
+              className="form-control mt-1 mb-3"
+              onChange={handleInput}
+              value={userRegistration.username}
+              name="username"
+              id="username"
+              placeholder="Username"
+              autoComplete="on"
+            ></input>
+          </div>
+          <div>
+            <input
+              type="text"
+              className="form-control mt-1 mb-3"
+              onChange={handleInput}
+              value={userRegistration.email}
+              name="email"
+              id="email"
+              placeholder="Email"
+              autoComplete="on"
+            ></input>
+          </div>
+          <div>
+            <input
+              type="number"
+              className="form-control mt-1 mb-3"
+              onChange={handleInput}
+              value={userRegistration.phn}
+              name="phn"
+              id="phn"
+              placeholder="Phone number"
+              autoComplete="on"
+            ></input>
+          </div>
+          <div>
+            <input
+              type={passwordType}
+              className="form-control mt-1 mb-3"
+              onChange={handleInput}
+              value={userRegistration.password}
+              name="password"
+              id="password"
+              placeholder="Password"
+              autoComplete="on"
+            ></input>
+          </div>
+          <div>
+            <input
+              type={passwordType}
+              className="form-control mt-1 mb-3"
+              onChange={handleInput}
+              value={userRegistration.confirmPassword}
+              name="confirmPassword"
+              id="confirmPassword"
+              placeholder="Confirm password"
+              autoComplete="off"
+            ></input>
+          </div>
+          <div className="btn btn-outline-primary" onClick={togglePassword}>
+            {passwordType === "password" ? <BsEyeFill /> : <BsEyeSlashFill />}
+          </div>
+          <div className="text-center">
+            <Button className="button" onClick={PostData}>
+              Register
+            </Button>
+          </div>
+        </form>
+        <Link to="/login">Already have an account Login</Link>
+      </div>
     </motion.div>
   );
 };

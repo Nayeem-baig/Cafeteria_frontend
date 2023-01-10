@@ -9,7 +9,6 @@ import AddItem from "./components/Admin/AddItem";
 import Veg from "./components/veg";
 import Nonveg from "./components/Nonveg";
 import UserCart from "./components/UserCart";
-import Navi from "./components/Navi";
 import Allcategory from "./components/Allcategory";
 import CategorySelected from "./components/CategorySelected";
 import Orderhistory from "./components/Orderhistory";

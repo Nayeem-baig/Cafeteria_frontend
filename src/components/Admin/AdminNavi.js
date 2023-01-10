@@ -1,22 +1,15 @@
-//bootstrap navbar
-import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import React from "react";
-import { MdOutlinePendingActions } from "react-icons/md";
 import { FcTodoList } from "react-icons/fc";
 import {
-  BsFillCartCheckFill,
-  BsFillBookmarkHeartFill,
-  BsHouseFill,
   BsFillPersonFill,
 } from "react-icons/bs";
 
 const AdminNavi = () => {
-  const navigate = useNavigate();
   return (
     <div className="">
       <Navbar className="bg-light" expand="lg" fixed="top">

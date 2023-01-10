@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import Checkout from "./Checkout_btn";
-import styles from "./Product.css";
-import Navbar from "react-bootstrap/Navbar";
 import { Col, Row } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
 import Navi from "./Navi";
 import formatDistance from "date-fns/formatDistance";
 import { motion } from "framer-motion";
